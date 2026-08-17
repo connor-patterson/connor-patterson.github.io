@@ -443,10 +443,10 @@ try {
     'The Work Log year picker is incomplete.',
   );
   await page.getByRole('button', { name: '2024', exact: true }).click();
-  await page.getByRole('heading', { name: 'Raised a key suite from 84% to 98%.' }).waitFor();
+  await page.getByRole('heading', { name: 'Made a flaky test suite trustworthy.' }).waitFor();
   const reliabilityNote = page
     .locator('.release-note')
-    .filter({ hasText: 'Raised a key suite from 84% to 98%.' });
+    .filter({ hasText: 'Made a flaky test suite trustworthy.' });
   await reliabilityNote.getByText('Open the changelog').click();
   await reliabilityNote.getByText('A more trustworthy suite meant failures').waitFor();
 

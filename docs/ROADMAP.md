@@ -42,7 +42,7 @@ These are release gates, not future polish:
 - Verify every résumé derived statement and external profile URL.
 - Exercise Start Here, Work Log, Builds, PatterOS Arcade, About Connor, Résumé, Say Hello, and Desktop Settings.
 - Exercise open, close, minimize, restore, maximize, drag, resize, options, route sync, and compact behavior.
-- Confirm all eight purposeful shortcuts appear on the desktop and match the launcher.
+- Confirm all ten purposeful shortcuts appear on the desktop and match the launcher.
 - Validate every color mode, reduced motion, 200% zoom, keyboard only use, and common phone, tablet, and desktop viewports.
 - Test all four games through play and restart; keep the real-time Snake pause and visibility checks.
 - Test pointer and tap signals, control exclusion, bounded cleanup, reduced motion, and forced colors.
@@ -58,7 +58,7 @@ Goal: make the operating system metaphor earn its space through calm, working in
 
 Current decisions:
 
-- [x] Keep the desktop to eight purposeful shortcuts in one compact cluster.
+- [x] Keep the desktop to ten purposeful shortcuts in one compact cluster.
 - [x] Keep secondary portfolio applications in the launcher and contextual links.
 - [x] Use conventional title bar controls and move size, share, and reposition actions into options.
 - [x] Add an interactive desktop field that remains decorative and never blocks controls.

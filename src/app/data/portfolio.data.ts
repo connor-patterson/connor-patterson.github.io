@@ -262,12 +262,12 @@ export const IMPACT_PATCH_NOTES = [
   {
     year: '2026',
     label: 'Edge cases',
-    title: 'Closed every tracked vehicle scenario.',
+    title: 'Hardened a complex vehicle workflow.',
     summary:
-      'Finished 12 of 12 tracked cases around incomplete and ambiguous vehicle information across the interface and API.',
+      'Closed the tracked edge cases around incomplete and ambiguous vehicle information across the interface and API.',
     detail:
-      'The paired release included focused API verification that passed 377 tests. Customer rules and internal identifiers are intentionally omitted here.',
-    tools: ['Angular', 'API design', '377 tests', 'CI/CD'],
+      'The paired release was backed by focused API verification. Customer rules and internal identifiers are intentionally omitted here.',
+    tools: ['Angular', 'API design', 'Regression testing', 'CI/CD'],
   },
   {
     year: '2026',
@@ -312,7 +312,7 @@ export const IMPACT_PATCH_NOTES = [
   {
     year: '2024',
     label: 'Test reliability',
-    title: 'Raised a key suite from 84% to 98%.',
+    title: 'Made a flaky test suite trustworthy.',
     summary:
       'Tracked intermittent failures through scenario selection and report processing, then repaired the automation instead of accepting the noise.',
     detail:

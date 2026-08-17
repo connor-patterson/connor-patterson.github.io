@@ -57,7 +57,7 @@ const SYSTEM_LAYERS: readonly SystemLayer[] = [
       'Revert early when evidence says a change is unsafe, then restore it with focused coverage.',
     ],
     proof:
-      'Raised a long-running acceptance suite from 84% to 98% reliability and stabilized a flaky sign-in path.',
+      'Raised the reliability of a long-running acceptance suite and stabilized a flaky sign-in path.',
     tools: ['CI/CD', 'AAT', 'Feature flags', 'Observability', 'Release planning'],
   },
 ];

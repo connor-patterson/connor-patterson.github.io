@@ -12,7 +12,7 @@ The launch architecture optimizes for five properties:
 2. **Static reliability:** the complete site runs from files on GitHub Pages with no application server.
 3. **Accessible adaptation:** wide screens support movable windows; compact and reading modes preserve normal document flow and focus order.
 4. **Useful customization:** color, motion, texture, reading layout, window size, and window position are local preferences with safe defaults.
-5. **Controlled novelty:** eight purposeful desktop shortcuts in a compact cluster, one coherent PatterOS visual language, locally shipped resources, short motion, and no borrowed operating system skin.
+5. **Controlled novelty:** ten purposeful desktop shortcuts in a compact cluster, one coherent PatterOS visual language, locally shipped resources, short motion, and no borrowed operating system skin.
 
 ## System overview
 
@@ -65,7 +65,7 @@ The boot sequence has no network or data dependency. It stages the desktop icons
 
 Adding an application should begin with its typed registry definition. Consumers derive shortcuts, taskbar entries, routes, and window state from that shared identity rather than maintaining parallel string lists.
 
-All eight applications receive desktop shortcuts in a compact cluster. The launcher, taskbar, routes, and contextual links reuse the same typed registry. Fresh default window positions begin beyond the icon cluster so discovery does not create overlap.
+All ten applications receive desktop shortcuts in a compact cluster. The launcher, taskbar, routes, and contextual links reuse the same typed registry. Fresh default window positions begin beyond the icon cluster so discovery does not create overlap.
 
 ### Window state
 

@@ -52,7 +52,7 @@
 }
 
 .start-panel__identity {
-  align-self: stretch;
+  align-self: center;
   padding: 0.65rem;
   background: var(--surface);
   border: 1px solid var(--border-mid);
@@ -91,23 +91,12 @@
   font-size: 0.7rem;
 }
 
-.start-panel__identity > strong,
-.start-panel__identity > span {
-  display: block;
-}
-
 .start-panel__identity > strong {
-  margin-top: 0.65rem;
+  display: block;
+  margin: 0.65rem 0 0.15rem;
   font-family: var(--font-interface);
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
-}
-
-.start-panel__identity > span {
-  margin: 0.2rem 0;
-  color: var(--ink-muted);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
 }
 
 .start-panel__metrics {
@@ -235,11 +224,10 @@
   }
 
   .start-panel__portrait-frame {
-    grid-row: 1 / 3;
+    grid-row: 1;
   }
 
-  .start-panel__identity > strong,
-  .start-panel__identity > span {
+  .start-panel__identity > strong {
     margin: 0;
   }
 
