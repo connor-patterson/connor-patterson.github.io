@@ -4,10 +4,11 @@ import { effect, inject, Injectable, signal } from '@angular/core';
 import type { ThemeMode, ThemePreferences } from './portfolio.models';
 
 const STORAGE_KEY = 'patteros.preferences.v2';
+const SCANLINE_DEFAULT_KEY = 'patteros.scanlines-visible.v1';
 
 const DEFAULT_PREFERENCES: ThemePreferences = {
   theme: 'day',
-  scanlines: false,
+  scanlines: true,
   motion: true,
   readingMode: false,
 };
@@ -81,8 +82,10 @@ export class PreferencesService {
 
   private readStoredPreferences(): void {
     try {
+      const hasVisibleScanlineDefault = localStorage.getItem(SCANLINE_DEFAULT_KEY) === 'true';
       const stored = localStorage.getItem(STORAGE_KEY);
       if (!stored) {
+        localStorage.setItem(SCANLINE_DEFAULT_KEY, 'true');
         return;
       }
 
@@ -90,7 +93,7 @@ export class PreferencesService {
       if (parsed.theme === 'day' || parsed.theme === 'night' || parsed.theme === 'contrast') {
         this.theme.set(parsed.theme);
       }
-      if (typeof parsed.scanlines === 'boolean') {
+      if (hasVisibleScanlineDefault && typeof parsed.scanlines === 'boolean') {
         this.scanlines.set(parsed.scanlines);
       }
       if (typeof parsed.motion === 'boolean' && !this.prefersReducedMotion) {
@@ -99,6 +102,7 @@ export class PreferencesService {
       if (typeof parsed.readingMode === 'boolean') {
         this.readingMode.set(parsed.readingMode);
       }
+      localStorage.setItem(SCANLINE_DEFAULT_KEY, 'true');
     } catch {
       // Invalid or unavailable local preferences should never block the portfolio.
     }

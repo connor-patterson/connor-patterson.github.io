@@ -25,7 +25,7 @@
   --border-mid: #756f66;
   --border-light: #ffffff;
   --shadow-window: 10px 12px 0 rgb(4 15 24 / 34%);
-  --scanline-opacity: 0;
+  --scanline-opacity: 0.68;
   --motion-fast: var(--duration-2, 150ms);
   --motion-medium: var(--duration-4, 300ms);
   --ease-out-2: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -120,19 +120,18 @@ body.scanlines::after {
   position: fixed;
   z-index: 9999;
   inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 3px,
-    rgb(0 0 0 / 10%) 4px
-  );
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgb(3 12 19 / 13%) 3px,
+      rgb(255 255 255 / 3%) 4px
+    ),
+    radial-gradient(ellipse at center, transparent 62%, rgb(0 0 0 / 12%) 100%);
   content: '';
-  opacity: var(--scanline-opacity, 0.28);
+  opacity: var(--scanline-opacity);
   pointer-events: none;
-}
-
-body.scanlines {
-  --scanline-opacity: 0.18;
 }
 
 body.motion-disabled *,
@@ -454,5 +453,9 @@ a:hover {
 
   .status-dot {
     forced-color-adjust: none;
+  }
+
+  body.scanlines::after {
+    display: none;
   }
 }
