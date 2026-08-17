@@ -1,0 +1,207 @@
+:host {
+  display: block;
+}
+
+.memory-game {
+  display: grid;
+  gap: 1rem;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: clamp(0.85rem, 2.5vw, 1.5rem);
+}
+
+.game-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.game-heading h3 {
+  margin: 0;
+  font-family: var(--font-interface);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  line-height: 1;
+}
+
+.game-heading p:not(.eyebrow) {
+  max-width: 36rem;
+  margin: 0.55rem 0 0;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.scoreboard {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.3rem;
+}
+
+.scoreboard span {
+  display: grid;
+  min-width: 4.5rem;
+  padding: 0.45rem 0.6rem;
+  text-align: center;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-mid);
+  font-family: var(--font-mono);
+}
+
+.scoreboard small {
+  color: var(--ink-muted);
+  font-size: 0.58rem;
+}
+
+.scoreboard strong {
+  color: var(--signal-strong);
+  font-size: 1.25rem;
+}
+
+.memory-board {
+  position: relative;
+  display: grid;
+  width: min(100%, 39rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.4rem, 1.6vw, 0.75rem);
+  justify-self: center;
+}
+
+.memory-card {
+  display: grid;
+  aspect-ratio: 0.82;
+  min-height: 4.5rem;
+  padding: 0.35rem;
+  color: #f8f4e8;
+  background:
+    linear-gradient(135deg, transparent 44%, rgb(255 255 255 / 13%) 45% 54%, transparent 55%),
+    #b14f35;
+  border: 3px solid;
+  border-color: #f4d4bd #4f2118 #4f2118 #f4d4bd;
+  box-shadow: 3px 4px 0 rgb(22 25 29 / 28%);
+  cursor: pointer;
+  font-family: var(--font-interface);
+  place-items: center;
+  transition:
+    translate var(--motion-fast) ease-out,
+    background-color var(--motion-fast) ease-out;
+}
+
+.memory-card:hover:not(:disabled) {
+  filter: brightness(1.08);
+  translate: 0 -2px;
+}
+
+.memory-card:disabled:not(.memory-card--matched) {
+  opacity: 1;
+}
+
+.memory-card--up {
+  color: #10231c;
+  background: #f7edcf;
+  border-color: #fff9e8 #746849 #746849 #fff9e8;
+}
+
+.memory-card--matched {
+  color: #0b2a1e;
+  background: #9be4bd;
+  border-color: #d5ffe7 #296346 #296346 #d5ffe7;
+  opacity: 0.78;
+}
+
+.memory-card__back {
+  display: grid;
+  width: 2.3rem;
+  aspect-ratio: 1;
+  border: 2px solid currentcolor;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  place-items: center;
+}
+
+.memory-card__symbol {
+  font-size: clamp(1.8rem, 8vw, 3.2rem);
+  line-height: 1;
+}
+
+.board-message {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.65rem;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+  background: rgb(8 24 18 / 88%);
+  border: 2px solid var(--border-mid);
+  inset: 0;
+}
+
+.board-message strong {
+  font-family: var(--font-interface);
+  font-size: clamp(1.6rem, 7vw, 2.6rem);
+}
+
+.board-message span {
+  color: #d3e9dc;
+}
+
+.game-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.game-actions > span {
+  margin-left: auto;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+@media (max-width: 620px) {
+  .game-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .scoreboard span {
+    flex: 1;
+  }
+
+  .memory-board {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .game-actions > span {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-card {
+    transition: none;
+  }
+
+  .memory-card:hover:not(:disabled) {
+    translate: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .memory-card,
+  .memory-card--up,
+  .memory-card--matched,
+  .board-message {
+    color: CanvasText;
+    background: Canvas;
+    border-color: CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  .memory-card--matched {
+    border-style: double;
+  }
+}

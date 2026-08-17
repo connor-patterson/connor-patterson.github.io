@@ -1,0 +1,44 @@
+<section class="resume-panel" aria-labelledby="resume-heading">
+  <header>
+    <p class="eyebrow">{{ copy.eyebrow }}</p>
+    <h2 id="resume-heading">{{ copy.title }}</h2>
+    <p class="resume-panel__description">{{ copy.description }}</p>
+  </header>
+
+  <div class="resume-panel__actions">
+    <a
+      class="retro-button retro-button--primary"
+      [href]="resume.src"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Open résumé <span aria-hidden="true">↗</span>
+    </a>
+    <a class="retro-button" [href]="resume.src" [attr.download]="resume.downloadName">
+      Download PDF
+    </a>
+  </div>
+
+  <details class="resume-panel__more">
+    <summary>Career snapshot</summary>
+    <dl class="resume-panel__highlights">
+      @for (item of highlights; track item.label) {
+        <div>
+          <dt>{{ item.label }}</dt>
+          <dd>{{ item.value }}</dd>
+        </div>
+      }
+    </dl>
+    <a
+      class="resume-panel__brief"
+      [href]="brief.src"
+      target="_blank"
+      rel="noopener noreferrer"
+      [attr.aria-label]="brief.ariaLabel"
+    >
+      {{ brief.label }} <span aria-hidden="true">↗</span>
+    </a>
+  </details>
+
+  <p class="resume-panel__privacy">{{ copy.privacyNote }}</p>
+</section>

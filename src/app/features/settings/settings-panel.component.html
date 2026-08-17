@@ -1,0 +1,85 @@
+<section class="settings-panel" aria-labelledby="display-preferences-heading">
+  <div class="settings-panel__screen">
+    <app-icon name="patter" aria-hidden="true" />
+    <small>
+      {{
+        preferences.theme() === 'day'
+          ? 'DAY SHIFT'
+          : preferences.theme() === 'night'
+            ? 'NIGHT SHIFT'
+            : 'HIGH CONTRAST'
+      }}
+    </small>
+  </div>
+
+  <div>
+    <p class="eyebrow">Make it yours</p>
+    <h2 id="display-preferences-heading">Set up your view.</h2>
+    <p>Your choices stay on this device.</p>
+  </div>
+
+  <fieldset>
+    <legend>Color mode</legend>
+    <div class="settings-panel__segmented">
+      <button
+        class="retro-button"
+        type="button"
+        [attr.aria-pressed]="preferences.theme() === 'day'"
+        (click)="preferences.setTheme('day')"
+      >
+        Day Shift
+      </button>
+      <button
+        class="retro-button"
+        type="button"
+        [attr.aria-pressed]="preferences.theme() === 'night'"
+        (click)="preferences.setTheme('night')"
+      >
+        Night Shift
+      </button>
+      <button
+        class="retro-button"
+        type="button"
+        [attr.aria-pressed]="preferences.theme() === 'contrast'"
+        (click)="preferences.setTheme('contrast')"
+      >
+        High Contrast
+      </button>
+    </div>
+  </fieldset>
+
+  <label class="settings-panel__toggle">
+    <input type="checkbox" [checked]="preferences.scanlines()" (change)="setScanlines($event)" />
+    <span>
+      <strong>CRT scanlines</strong>
+      <small>Add a faint old monitor texture.</small>
+    </span>
+  </label>
+
+  <label class="settings-panel__toggle">
+    <input type="checkbox" [checked]="preferences.motion()" (change)="setMotion($event)" />
+    <span>
+      <strong>Interface motion</strong>
+      <small>Turn the small slides, lifts, and pulses on or off.</small>
+    </span>
+  </label>
+
+  <label class="settings-panel__toggle">
+    <input
+      type="checkbox"
+      [checked]="preferences.readingMode()"
+      (change)="setReadingMode($event)"
+    />
+    <span>
+      <strong>Comfortable reading</strong>
+      <small>Stack open windows with roomier type and no overlap.</small>
+    </span>
+  </label>
+
+  <div class="settings-panel__actions">
+    <button class="retro-button" type="button" (click)="resetWorkspace()">Reset workspace</button>
+    <button class="retro-button retro-button--danger" type="button" (click)="resetLocalData()">
+      Clear saved data
+    </button>
+  </div>
+</section>

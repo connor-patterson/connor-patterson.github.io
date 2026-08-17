@@ -1,0 +1,205 @@
+.launcher {
+  position: fixed;
+  z-index: 1100;
+  bottom: 4rem;
+  left: 0.4rem;
+  width: min(22rem, calc(100vw - 0.8rem));
+  max-height: min(43rem, calc(100dvh - 5rem));
+  overflow: auto;
+  color: var(--ink);
+  background: var(--surface);
+  border: 3px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  box-shadow: 8px 8px 0 rgb(0 0 0 / 35%);
+  animation: launcher-enter var(--motion-medium) var(--ease-spring-3, ease-out) both;
+}
+
+.launcher__identity {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  color: var(--titlebar-text);
+  background: linear-gradient(100deg, var(--titlebar), var(--titlebar-end));
+  border-bottom: 2px solid var(--border-dark);
+}
+
+.launcher__identity-copy {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.launcher__identity strong {
+  display: block;
+  font-family: var(--font-interface);
+  font-size: 1.05rem;
+}
+
+.launcher__availability {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-top: 0.28rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.25;
+}
+
+.launcher__availability .status-dot {
+  width: 0.62rem;
+  height: 0.62rem;
+  flex: 0 0 0.62rem;
+  margin: 0;
+}
+
+.launcher__portrait {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 3px 3px 0 rgb(0 0 0 / 35%);
+  filter: saturate(0.78) contrast(1.05);
+}
+
+.launcher__apps {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.5rem;
+}
+
+.launcher__apps button {
+  display: grid;
+  grid-template-columns: 2.7rem 1fr;
+  min-height: 3.25rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 0.55rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    transform var(--motion-fast) var(--ease-out-2, ease-out),
+    color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+.launcher__apps button:hover,
+.launcher__apps button:focus-visible {
+  color: #fff;
+  background: var(--titlebar);
+  border-color: var(--border-dark);
+  transform: translateX(3px);
+}
+
+.launcher__apps strong {
+  font-family: var(--font-interface);
+  font-size: 0.84rem;
+}
+
+.launcher__icon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: white;
+  background: var(--titlebar);
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  font-family: var(--font-interface);
+  font-size: 1.8rem;
+  place-items: center;
+}
+
+.launcher__icon[data-kind='arcade'] {
+  --icon-accent: #173d4c;
+
+  color: var(--ink);
+  background: var(--accent);
+}
+
+.launcher__icon[data-kind='project'] {
+  --icon-accent: #173d4c;
+
+  color: #071a14;
+  background: var(--signal);
+}
+
+.launcher__footer {
+  display: flex;
+  align-items: center;
+  padding: 0.55rem 0.7rem;
+  border-top: 2px solid var(--border-mid);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.launcher__close {
+  display: grid;
+  width: 2.25rem;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  cursor: pointer;
+  place-items: center;
+}
+
+.launcher__close svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-width: 2;
+}
+
+.launcher__close:hover,
+.launcher__close:focus-visible {
+  color: #fff;
+  background: var(--danger);
+}
+
+.launcher__close:active {
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+}
+
+@keyframes launcher-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    transform-origin: bottom left;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transform-origin: bottom left;
+  }
+}
+
+@media (max-width: 840px) {
+  .launcher {
+    right: 0.35rem;
+    bottom: 4.25rem;
+    left: 0.35rem;
+    width: auto;
+    max-height: calc(100dvh - 5rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .launcher__apps button {
+    min-height: 3.25rem;
+  }
+
+  .launcher__close {
+    width: 3rem;
+    min-width: 3rem;
+    height: 3rem;
+  }
+}

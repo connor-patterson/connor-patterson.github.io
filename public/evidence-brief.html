@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Connor Patterson | Selected Engineering Work</title>
+    <meta
+      name="description"
+      content="A print friendly companion to Connor Patterson's résumé with production results, technical decisions, and independent projects."
+    />
+    <link rel="canonical" href="https://connor-patterson.github.io/evidence-brief.html" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Connor Patterson | Selected Engineering Work" />
+    <meta
+      property="og:description"
+      content="Production results, technical decisions, and independent projects in a compact printable brief."
+    />
+    <meta property="og:url" content="https://connor-patterson.github.io/evidence-brief.html" />
+    <meta property="og:image" content="https://connor-patterson.github.io/assets/social-card.png" />
+    <meta property="og:image:alt" content="PatterOS portfolio preview" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Connor Patterson | Selected Engineering Work" />
+    <meta
+      name="twitter:description"
+      content="Production results, technical decisions, and independent projects in a compact printable brief."
+    />
+    <meta
+      name="twitter:image"
+      content="https://connor-patterson.github.io/assets/social-card.png"
+    />
+    <meta name="twitter:image:alt" content="PatterOS portfolio preview" />
+    <script src="./evidence-brief.js" defer></script>
+    <style>
+      @font-face {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 300 700;
+        font-display: swap;
+        src: url('./assets/fonts/space-grotesk-latin-wght-normal.woff2') format('woff2');
+      }
+
+      :root {
+        color: #17242a;
+        background: #eef1eb;
+        font-family: 'Space Grotesk', Aptos, Arial, sans-serif;
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        line-height: 1.48;
+      }
+
+      a {
+        color: #075f5b;
+        font-weight: 700;
+        text-underline-offset: 0.16em;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid #9a5d00;
+        outline-offset: 3px;
+      }
+
+      .page {
+        width: min(100% - 2rem, 68rem);
+        margin: 2rem auto;
+        padding: clamp(1.25rem, 4vw, 3rem);
+        background: #fffef8;
+        border: 1px solid #8b938d;
+        box-shadow: 0.6rem 0.6rem 0 #17363a;
+      }
+
+      .masthead {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1.5rem;
+        align-items: start;
+        padding-bottom: 1.2rem;
+        border-bottom: 0.35rem solid #0c716c;
+      }
+
+      .kicker,
+      dt,
+      .metric span,
+      .case-label,
+      .source-note,
+      footer {
+        font-family: Consolas, 'Courier New', monospace;
+      }
+
+      .kicker {
+        margin: 0 0 0.5rem;
+        color: #0c716c;
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 18ch;
+        margin-bottom: 0.65rem;
+        font-size: clamp(2.15rem, 6vw, 4rem);
+        letter-spacing: -0.055em;
+        line-height: 0.95;
+      }
+
+      h2 {
+        margin-bottom: 0.8rem;
+        font-size: 1.45rem;
+        letter-spacing: -0.025em;
+      }
+
+      h3 {
+        margin-bottom: 0.45rem;
+        font-size: 1.05rem;
+      }
+
+      .intro {
+        max-width: 58ch;
+        margin-bottom: 0;
+        color: #46565b;
+        font-size: 1.02rem;
+      }
+
+      .masthead__actions {
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 2.75rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6rem 0.85rem;
+        color: #fff;
+        background: #17363a;
+        border: 2px solid #17363a;
+        cursor: pointer;
+        font:
+          700 0.78rem/1 'Space Grotesk',
+          Aptos,
+          Arial,
+          sans-serif;
+        text-decoration: none;
+      }
+
+      .button.alt {
+        color: #17363a;
+        background: #fffef8;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.65rem;
+        margin: 1.3rem 0;
+      }
+
+      .metric {
+        min-width: 0;
+        padding: 0.8rem;
+        background: #e6f3ed;
+        border-top: 0.25rem solid #0c716c;
+      }
+
+      .metric strong,
+      .metric span {
+        display: block;
+      }
+
+      .metric strong {
+        color: #075f5b;
+        font-size: clamp(1.35rem, 3vw, 2rem);
+        line-height: 1;
+      }
+
+      .metric span {
+        margin-top: 0.35rem;
+        color: #3f5256;
+        font-size: 0.66rem;
+      }
+
+      main > section {
+        padding: 1.25rem 0;
+        border-top: 1px solid #a9b0aa;
+      }
+
+      .cases {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.85rem;
+      }
+
+      .case {
+        padding: 1rem;
+        background: #f5f3e9;
+        border: 1px solid #a9a596;
+      }
+
+      .case-label {
+        display: block;
+        margin-bottom: 0.55rem;
+        color: #8a4c00;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+      }
+
+      .case p,
+      .case li,
+      .project p,
+      .project dd {
+        color: #46565b;
+        font-size: 0.86rem;
+      }
+
+      .case p {
+        margin-bottom: 0.65rem;
+      }
+
+      .case ul {
+        margin: 0 0 0.8rem;
+        padding-left: 1.15rem;
+      }
+
+      .case li + li {
+        margin-top: 0.35rem;
+      }
+
+      .case p.case__result {
+        padding: 0.65rem;
+        color: #fff;
+        background: #17363a;
+        font-size: 0.82rem;
+      }
+
+      .case__result strong {
+        color: #88e5c4;
+      }
+
+      .quick-fixes,
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .quick-fixes article {
+        padding-left: 0.8rem;
+        border-left: 0.25rem solid #bb7308;
+      }
+
+      .quick-fixes p {
+        margin-bottom: 0;
+        color: #46565b;
+        font-size: 0.86rem;
+      }
+
+      .project {
+        padding: 1rem;
+        border: 1px solid #a9b0aa;
+      }
+
+      .project > p {
+        min-height: 3.8rem;
+      }
+
+      .project dl {
+        display: grid;
+        gap: 0.55rem;
+        margin: 0.8rem 0;
+      }
+
+      .project dl div {
+        padding: 0.55rem;
+        background: #eef1eb;
+      }
+
+      dt {
+        color: #075f5b;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      dd {
+        margin: 0.25rem 0 0;
+      }
+
+      .source-note {
+        margin: 1rem 0 0;
+        padding: 0.75rem;
+        color: #46565b;
+        background: #eef1eb;
+        font-size: 0.7rem;
+      }
+
+      footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        justify-content: space-between;
+        padding-top: 1rem;
+        border-top: 0.35rem solid #17363a;
+        color: #46565b;
+        font-size: 0.72rem;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 760px) {
+        .masthead,
+        .cases,
+        .quick-fixes,
+        .projects {
+          grid-template-columns: 1fr;
+        }
+
+        .masthead__actions {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project > p {
+          min-height: 0;
+        }
+      }
+
+      @media (max-width: 430px) {
+        .page {
+          width: 100%;
+          margin: 0;
+          border: 0;
+          box-shadow: none;
+        }
+
+        .masthead__actions,
+        .metrics {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        @page {
+          margin: 0.45in;
+          size: letter;
+        }
+
+        :root,
+        body {
+          background: #fff;
+        }
+
+        .page {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          border: 0;
+          box-shadow: none;
+        }
+
+        .no-print {
+          display: none;
+        }
+
+        h2,
+        h3,
+        .case,
+        .project,
+        .quick-fixes article {
+          break-inside: avoid;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="page">
+      <header class="masthead">
+        <div>
+          <p class="kicker">PatterOS · Selected work · August 2026</p>
+          <h1>Connor Patterson / Selected Work</h1>
+          <p class="intro">
+            A printable companion to my résumé. Numbers first, then what I actually did.
+          </p>
+        </div>
+        <nav class="masthead__actions no-print" aria-label="Evidence brief actions">
+          <button class="button" id="print-evidence" type="button">Print or save PDF</button>
+          <a class="button alt" href="./#/resume">Back to PatterOS</a>
+        </nav>
+      </header>
+
+      <div class="metrics" aria-label="Selected production results">
+        <div class="metric"><strong>600K+</strong><span>MONTHLY QUOTE TRANSACTIONS</span></div>
+        <div class="metric"><strong>50.51%</strong><span>LOWER TRACKED FLOW LATENCY</span></div>
+        <div class="metric"><strong>$3M</strong><span>ANNUAL SAVINGS CONTRIBUTION</span></div>
+        <div class="metric"><strong>4</strong><span>CODEBASES IN ONE SECURE CHANGE</span></div>
+      </div>
+
+      <main>
+        <section aria-labelledby="production-heading">
+          <h2 id="production-heading">Two production stories</h2>
+          <div class="cases">
+            <article class="case">
+              <span class="case-label">Performance</span>
+              <h3>A 58 second quote flow was too long.</h3>
+              <p>
+                I used real user monitoring and API profiling to find repeated work across an
+                Angular and Java flow.
+              </p>
+              <ul>
+                <li>Hoisted converter calls and cached safe results.</li>
+                <li>Deduplicated requests in flight.</li>
+                <li>Skipped updates that changed nothing.</li>
+                <li>Checked the release with tests, review, and production telemetry.</li>
+              </ul>
+              <p class="case__result">
+                <strong>Result:</strong> 58.75s to 29.08s, with a latest observed total of 26.09s.
+              </p>
+              <a href="./case-studies/latency/">Open the full printable case page</a>
+            </article>
+
+            <article class="case">
+              <span class="case-label">Secure delivery</span>
+              <h3>One change crossed four codebases.</h3>
+              <p>
+                Required identifiers had to reach downstream systems without appearing in the
+                interface.
+              </p>
+              <ul>
+                <li>
+                  Mapped the path through the UI, API, policy integration, and parameter service.
+                </li>
+                <li>Kept sensitive values out of displayed browser state.</li>
+                <li>Coordinated tests, review, delivery checks, and release readiness.</li>
+              </ul>
+              <p class="case__result">
+                <strong>Result:</strong> one validated change across four connected codebases.
+              </p>
+              <a href="./case-studies/secure-delivery/">Open the full printable case page</a>
+            </article>
+          </div>
+        </section>
+
+        <section aria-labelledby="fixes-heading">
+          <h2 id="fixes-heading">Other useful fixes</h2>
+          <div class="quick-fixes">
+            <article>
+              <h3>Angular 18 to 19</h3>
+              <p>
+                Upgraded after vulnerability findings, checked compatibility, and helped partner
+                teams plan the same move.
+              </p>
+            </article>
+            <article>
+              <h3>Seven scenarios became three</h3>
+              <p>Cut acceptance test repetition by 57% while keeping the useful validation.</p>
+            </article>
+          </div>
+        </section>
+
+        <section aria-labelledby="projects-heading">
+          <h2 id="projects-heading">Things I build after work</h2>
+          <div class="projects">
+            <article class="project">
+              <h3>Isotara</h3>
+              <p>
+                A chemistry roguelike deckbuilder in Godot with modular card effects, procedural
+                encounters, upgrade paths, and replayable runs.
+              </p>
+              <dl>
+                <div>
+                  <dt>Design choice</dt>
+                  <dd>Reusable effect modules instead of one off card logic.</dd>
+                </div>
+                <div>
+                  <dt>Checked by</dt>
+                  <dd>Rapid prototypes, automated rule checks, and complete run playthroughs.</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="project">
+              <h3>PredictChain</h3>
+              <p>
+                A decentralized marketplace for dataset uploads, training requests, model queries,
+                and participating compute nodes.
+              </p>
+              <dl>
+                <div>
+                  <dt>Published</dt>
+                  <dd>ChainScience 2023.</dd>
+                </div>
+                <div>
+                  <dt>Recognition</dt>
+                  <dd>
+                    First place and Most Innovative Technology at the 2023 MEGA ACE Hackathon.
+                  </dd>
+                </div>
+              </dl>
+              <a href="https://arxiv.org/abs/2307.15168" rel="noopener noreferrer"
+                >Read the published paper</a
+              >
+            </article>
+          </div>
+
+          <p class="source-note">
+            Project diagrams on the website are portfolio system sketches, not product screenshots.
+            Production notes are intentionally sanitized. Customer names, endpoints, and internal
+            architecture remain private.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>Lead Software Engineer, Full Stack · RPI Computer Science · AWS Certified</p>
+        <p>
+          <a href="mailto:connor.patter@aol.com">connor.patter@aol.com</a> ·
+          <a href="https://www.linkedin.com/in/con-patter38/">LinkedIn</a> ·
+          <a href="https://github.com/connorpatterson5">GitHub</a> ·
+          <a href="./assets/ConnorPattersonResume2026.pdf">Résumé PDF</a>
+        </p>
+      </footer>
+    </article>
+  </body>
+</html>

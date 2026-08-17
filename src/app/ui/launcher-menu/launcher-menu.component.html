@@ -1,0 +1,42 @@
+<aside class="launcher" id="launcher-menu" aria-label="Application launcher">
+  <header class="launcher__identity">
+    <img src="assets/connor-profile.jpg" alt="" width="56" height="56" class="launcher__portrait" />
+    <div class="launcher__identity-copy">
+      <strong>Connor Patterson</strong>
+      <span class="launcher__availability"
+        ><span class="status-dot" aria-hidden="true"></span> <span>Online</span></span
+      >
+    </div>
+    <button
+      class="launcher__close"
+      type="button"
+      aria-label="Close application launcher"
+      title="Close"
+      (click)="shutdown.emit()"
+    >
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 3 10 10m0-10L3 13" /></svg>
+    </button>
+  </header>
+
+  <nav class="launcher__apps" aria-label="PatterOS applications">
+    @for (app of apps(); track app.id) {
+      <button
+        [id]="'launcher-app-' + app.id"
+        type="button"
+        [attr.aria-label]="'Open ' + app.label + ': ' + app.description"
+        (click)="launch.emit(app.id)"
+      >
+        <span class="launcher__icon" [attr.data-kind]="app.kind" aria-hidden="true">
+          <app-icon [name]="app.icon" />
+        </span>
+        <strong>{{ app.label }}</strong>
+      </button>
+    }
+  </nav>
+
+  <footer class="launcher__footer">
+    <span>
+      {{ theme() === 'day' ? 'Day mode' : theme() === 'night' ? 'Night mode' : 'High contrast' }}
+    </span>
+  </footer>
+</aside>

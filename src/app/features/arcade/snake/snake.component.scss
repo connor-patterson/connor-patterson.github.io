@@ -1,0 +1,294 @@
+:host {
+  display: block;
+}
+
+.snake-game {
+  display: grid;
+  gap: 1rem;
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: clamp(0.85rem, 2.5vw, 1.5rem);
+}
+
+.game-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.game-heading h3 {
+  margin: 0;
+  font-family: var(--font-interface);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  line-height: 1;
+}
+
+.game-heading p:not(.eyebrow) {
+  max-width: 36rem;
+  margin: 0.55rem 0 0;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.scoreboard {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.3rem;
+}
+
+.scoreboard span {
+  display: grid;
+  min-width: 4.5rem;
+  padding: 0.45rem 0.6rem;
+  text-align: center;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-mid);
+  font-family: var(--font-mono);
+}
+
+.scoreboard small {
+  color: var(--ink-muted);
+  font-size: 0.58rem;
+}
+
+.scoreboard strong {
+  color: var(--signal-strong);
+  font-size: 1.25rem;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8rem;
+  align-items: end;
+  gap: 1rem;
+}
+
+.snake-board {
+  --board-size: 16;
+
+  position: relative;
+  display: grid;
+  width: min(100%, 31rem);
+  aspect-ratio: 1;
+  justify-self: center;
+  overflow: hidden;
+  background: #112820;
+  border: 4px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  grid-template-columns: repeat(var(--board-size), 1fr);
+}
+
+.snake-board:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.snake-cell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid rgb(255 255 255 / 4%);
+}
+
+.snake-cell[data-kind='snake'],
+.snake-cell[data-kind='head'] {
+  margin: 8%;
+  background: #78dda6;
+  border: 1px solid #b9ffd4;
+  border-radius: 25%;
+  box-shadow: inset -2px -2px rgb(13 76 47 / 36%);
+}
+
+.snake-cell[data-kind='head'] {
+  background: #a9f5c6;
+  border-radius: 35%;
+}
+
+.snake-cell[data-kind='head']::before,
+.snake-cell[data-kind='head']::after {
+  position: absolute;
+  width: 18%;
+  aspect-ratio: 1;
+  background: #10251d;
+  border-radius: 50%;
+  content: '';
+  right: 19%;
+  top: 20%;
+}
+
+.snake-cell[data-kind='head']::after {
+  bottom: 20%;
+  top: auto;
+}
+
+.snake-board[data-direction='left'] .snake-cell[data-kind='head']::before,
+.snake-board[data-direction='left'] .snake-cell[data-kind='head']::after {
+  left: 19%;
+  right: auto;
+}
+
+.snake-board[data-direction='up'] .snake-cell[data-kind='head']::before,
+.snake-board[data-direction='up'] .snake-cell[data-kind='head']::after {
+  left: 20%;
+  right: auto;
+  top: 19%;
+}
+
+.snake-board[data-direction='up'] .snake-cell[data-kind='head']::after {
+  left: auto;
+  right: 20%;
+}
+
+.snake-board[data-direction='down'] .snake-cell[data-kind='head']::before,
+.snake-board[data-direction='down'] .snake-cell[data-kind='head']::after {
+  bottom: 19%;
+  left: 20%;
+  right: auto;
+  top: auto;
+}
+
+.snake-board[data-direction='down'] .snake-cell[data-kind='head']::after {
+  left: auto;
+  right: 20%;
+}
+
+.snake-cell[data-kind='food']::before {
+  position: absolute;
+  width: 62%;
+  aspect-ratio: 1;
+  background: #ff755f;
+  border: 1px solid #ffd3c7;
+  border-radius: 48% 48% 55% 55%;
+  box-shadow: 0 0 0.35rem rgb(255 117 95 / 45%);
+  content: '';
+  inset: 20%;
+}
+
+.snake-cell[data-kind='food']::after {
+  position: absolute;
+  width: 12%;
+  height: 24%;
+  background: #81e49d;
+  content: '';
+  left: 55%;
+  top: 10%;
+  rotate: 25deg;
+}
+
+.board-message {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.65rem;
+  padding: 1rem;
+  color: #fff;
+  text-align: center;
+  background: rgb(8 24 18 / 88%);
+  inset: 0;
+}
+
+.board-message strong {
+  font-family: var(--font-interface);
+  font-size: clamp(1.6rem, 7vw, 2.6rem);
+}
+
+.board-message span {
+  color: #d3e9dc;
+}
+
+.snake-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+}
+
+.snake-controls button {
+  min-width: 2.75rem;
+  min-height: 3.2rem;
+  color: var(--ink);
+  background: var(--surface-raised);
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.snake-controls button:first-child {
+  grid-column: 2;
+}
+
+.snake-controls button:nth-child(2) {
+  grid-column: 1;
+}
+
+.snake-controls button:active {
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  translate: 1px 1px;
+}
+
+.game-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.game-actions > span {
+  margin-left: auto;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+@media (max-width: 620px) {
+  .game-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .scoreboard span {
+    flex: 1;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .snake-controls {
+    width: min(13rem, 100%);
+    justify-self: center;
+  }
+
+  .game-actions > span {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snake-controls button:active {
+    translate: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .snake-board,
+  .snake-cell,
+  .snake-cell[data-kind='snake'],
+  .snake-cell[data-kind='head'],
+  .snake-cell[data-kind='food']::before,
+  .board-message {
+    color: CanvasText;
+    background: Canvas;
+    border-color: CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  .snake-cell[data-kind='snake'],
+  .snake-cell[data-kind='head'],
+  .snake-cell[data-kind='food']::before {
+    background: Highlight;
+  }
+}

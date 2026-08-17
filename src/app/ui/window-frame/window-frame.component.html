@@ -1,0 +1,147 @@
+<section
+  class="window-frame"
+  [class.window-frame--active]="active()"
+  [class.window-frame--maximized]="state().isMaximized"
+  [class.window-frame--compact]="compact()"
+  [class.window-frame--resizing]="resizing()"
+  [hidden]="state().isMinimized"
+  [style.z-index]="state().zIndex"
+  [style.--window-width.px]="state().size.width"
+  [style.--window-height.px]="state().size.height"
+  [style.--window-x.px]="state().position.x"
+  [style.--window-y.px]="state().position.y"
+  [attr.aria-labelledby]="titleId()"
+  [attr.data-app]="app().id"
+  [id]="'window-' + app().id"
+  cdkDrag
+  [cdkDragBoundary]="'.desktop-stage'"
+  [cdkDragDisabled]="compact() || state().isMaximized"
+  [cdkDragFreeDragPosition]="state().position"
+  tabindex="-1"
+  role="region"
+  (pointerdown)="onFocus()"
+  (focusin)="onFocus()"
+  (cdkDragStarted)="onDragStart()"
+  (cdkDragEnded)="onDragEnd($event)"
+>
+  <header class="window-frame__titlebar">
+    <div class="window-frame__drag-target" cdkDragHandle>
+      <app-icon class="window-frame__app-icon" [name]="app().icon" aria-hidden="true" />
+      <div class="window-frame__title" [id]="titleId()">{{ app().label }}</div>
+    </div>
+    <div class="window-frame__controls">
+      <details
+        class="window-frame__tools"
+        tabindex="-1"
+        (click)="$event.stopPropagation()"
+        (pointerdown)="$event.stopPropagation()"
+        (keydown.escape)="closeTools($event, true)"
+      >
+        <summary
+          class="window-frame__control window-frame__control--tools"
+          [attr.aria-label]="'Window options for ' + app().label"
+          title="Window options"
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <circle cx="3" cy="8" r="1" />
+            <circle cx="8" cy="8" r="1" />
+            <circle cx="13" cy="8" r="1" />
+          </svg>
+        </summary>
+        <div class="window-frame__tool-menu" role="group" aria-label="Window options">
+          <strong>Window options</strong>
+          <label class="window-frame__preset-label">
+            <span>Size</span>
+            <select
+              class="window-frame__preset"
+              [attr.aria-label]="'Size preset for ' + app().label"
+              (change)="selectSizePreset($event); closeTools($event)"
+            >
+              <option value="">Choose a size</option>
+              <option value="cozy">Cozy</option>
+              <option value="default">Default</option>
+              <option value="wide">Wide</option>
+              <option value="fit">Fit screen</option>
+            </select>
+          </label>
+          <button
+            class="window-frame__tool-action window-frame__control--reposition"
+            type="button"
+            [attr.aria-label]="'Reposition ' + app().label + ' without dragging'"
+            (click)="reposition(); closeTools($event)"
+          >
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M2 6V2h4M2 2l4 4m8 4v4h-4m4 0-4-4" />
+            </svg>
+            <span>Move to another corner</span>
+          </button>
+          <button
+            class="window-frame__tool-action window-frame__control--share"
+            type="button"
+            [attr.aria-label]="'Copy a link to ' + app().label"
+            (click)="shareRequested.emit(app().id); closeTools($event)"
+          >
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M6 5H4a3 3 0 0 0 0 6h2m4-6h2a3 3 0 0 1 0 6h-2M5 8h6" />
+            </svg>
+            <span>Copy a link</span>
+          </button>
+        </div>
+      </details>
+      <button
+        class="window-frame__control window-frame__control--minimize"
+        type="button"
+        [attr.aria-label]="'Minimize ' + app().label"
+        title="Minimize"
+        (click)="minimizeRequested.emit(app().id); $event.stopPropagation()"
+      >
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12h10" /></svg>
+      </button>
+      <button
+        class="window-frame__control window-frame__control--maximize"
+        type="button"
+        [attr.aria-label]="(state().isMaximized ? 'Restore ' : 'Maximize ') + app().label"
+        [title]="state().isMaximized ? 'Restore' : 'Maximize'"
+        (click)="maximizeRequested.emit(app().id); $event.stopPropagation()"
+      >
+        @if (state().isMaximized) {
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5h8v8H3zm3-2h7v7" /></svg>
+        } @else {
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v10H3z" /></svg>
+        }
+      </button>
+      <button
+        class="window-frame__control window-frame__control--close"
+        type="button"
+        [attr.aria-label]="'Close ' + app().label"
+        title="Close"
+        (click)="closeRequested.emit(app().id); $event.stopPropagation()"
+      >
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 3 10 10m0-10L3 13" /></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="window-frame__content">
+    <ng-content />
+  </div>
+
+  <footer class="window-frame__statusbar">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span>Ready</span>
+  </footer>
+
+  <button
+    class="window-frame__resize-handle"
+    type="button"
+    [attr.aria-label]="'Resize ' + app().label + '. Use arrow keys; hold Shift for larger steps.'"
+    title="Drag to resize. Arrow keys also work."
+    (pointerdown)="startResize($event)"
+    (pointermove)="continueResize($event)"
+    (pointerup)="finishResize($event)"
+    (pointercancel)="finishResize($event)"
+    (keydown)="resizeWithKeyboard($event)"
+  >
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5 14 9-9m-4 9 4-4m-9 0 5-5" /></svg>
+  </button>
+</section>

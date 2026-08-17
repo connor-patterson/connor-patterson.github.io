@@ -1,0 +1,30 @@
+<section class="profile-panel" aria-labelledby="profile-heading">
+  <header class="profile-panel__header">
+    <p class="eyebrow">{{ copy.eyebrow }}</p>
+    <h2 id="profile-heading">{{ copy.title }}</h2>
+    @for (paragraph of copy.paragraphs; track paragraph) {
+      <p>{{ paragraph }}</p>
+    }
+  </header>
+
+  <dl class="profile-panel__facts" aria-label="Education and certification">
+    @for (fact of facts; track fact.label) {
+      <div>
+        <dt>{{ fact.label }}</dt>
+        <dd>{{ fact.value }}</dd>
+      </div>
+    }
+  </dl>
+
+  <details class="profile-panel__capabilities">
+    <summary>Skills and tools</summary>
+    <div class="profile-panel__capability-grid">
+      @for (group of capabilityGroups; track group.title) {
+        <section>
+          <h3>{{ group.title }}</h3>
+          <p>{{ group.items.join(' · ') }}</p>
+        </section>
+      }
+    </div>
+  </details>
+</section>

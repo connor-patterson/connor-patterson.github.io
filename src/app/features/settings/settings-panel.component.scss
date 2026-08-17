@@ -1,0 +1,101 @@
+.settings-panel {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.settings-panel h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1;
+}
+
+.settings-panel p {
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.settings-panel__screen {
+  display: grid;
+  min-height: 7rem;
+  color: var(--signal);
+  background:
+    linear-gradient(rgb(255 255 255 / 5%) 1px, transparent 1px) 0 0 / 100% 4px,
+    #07131d;
+  border: 4px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  font-family: var(--font-interface);
+  place-items: center;
+}
+
+.settings-panel__screen app-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  font-size: 2rem;
+}
+
+.settings-panel__screen small {
+  align-self: start;
+  font-size: 0.62rem;
+}
+
+.settings-panel fieldset,
+.settings-panel__toggle,
+.settings-panel__actions {
+  grid-column: 1 / -1;
+}
+
+.settings-panel fieldset {
+  padding: 0.8rem;
+  border: 1px solid var(--border-mid);
+}
+
+.settings-panel legend {
+  padding: 0 0.3rem;
+  font-family: var(--font-interface);
+}
+
+.settings-panel__segmented,
+.settings-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.settings-panel__toggle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  min-height: 4.25rem;
+  align-items: start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: color-mix(in srgb, var(--surface-raised), transparent 15%);
+  border: 1px solid var(--border-mid);
+}
+
+.settings-panel__toggle input {
+  width: 1.35rem;
+  height: 1.35rem;
+  accent-color: var(--signal-strong);
+}
+
+.settings-panel__toggle strong,
+.settings-panel__toggle small {
+  display: block;
+}
+
+.settings-panel__toggle small {
+  margin-top: 0.2rem;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 520px) {
+  .settings-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-panel__screen {
+    min-height: 5rem;
+  }
+}

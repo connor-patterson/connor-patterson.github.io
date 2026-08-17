@@ -1,0 +1,132 @@
+<section class="impact-panel" aria-labelledby="impact-heading">
+  <header class="impact-panel__header">
+    <p class="eyebrow">Production work</p>
+    <h2 id="impact-heading">Results from real systems.</h2>
+    <p>{{ intro }}</p>
+  </header>
+
+  <section class="release-history" aria-labelledby="release-history-heading">
+    <header class="release-history__header">
+      <div>
+        <p class="eyebrow">Release history</p>
+        <h3 id="release-history-heading">What else shipped?</h3>
+      </div>
+      <div class="release-history__years" aria-label="Choose a year">
+        @for (year of years; track year) {
+          <button
+            type="button"
+            [class.release-history__year--active]="selectedYear() === year"
+            [attr.aria-pressed]="selectedYear() === year"
+            (click)="selectYear(year)"
+          >
+            {{ year }}
+          </button>
+        }
+      </div>
+    </header>
+
+    <p class="release-history__status" aria-live="polite" aria-atomic="true">
+      Showing {{ selectedYear() }} work.
+    </p>
+
+    <div class="release-history__list">
+      @for (note of selectedNotes(); track note.title) {
+        <article class="release-note">
+          <span>{{ note.label }}</span>
+          <h4>{{ note.title }}</h4>
+          <p>{{ note.summary }}</p>
+          <details>
+            <summary>Open the changelog</summary>
+            <p>{{ note.detail }}</p>
+            <ul aria-label="Tools and practices used">
+              @for (tool of note.tools; track tool) {
+                <li class="tag">{{ tool }}</li>
+              }
+            </ul>
+          </details>
+        </article>
+      }
+    </div>
+  </section>
+
+  <div class="impact-panel__section-heading">
+    <p class="eyebrow">A closer look</p>
+    <h3>Two stories with the numbers.</h3>
+  </div>
+
+  <div class="impact-panel__studies">
+    @for (study of caseStudies; track study.id) {
+      <article class="case-study" [attr.aria-labelledby]="'case-study-' + study.id">
+        <header class="case-study__header">
+          <div>
+            <p class="eyebrow">{{ study.eyebrow }}</p>
+            <h3 [id]="'case-study-' + study.id">{{ study.title }}</h3>
+          </div>
+          @if (study.results[0]; as leadResult) {
+            <div class="case-study__lead-result">
+              <strong>{{ leadResult.value }}</strong>
+              <span>{{ leadResult.label }}</span>
+            </div>
+          }
+        </header>
+
+        <p class="case-study__summary">{{ study.challenge }}</p>
+
+        <details class="case-study__details">
+          <summary>How I did it</summary>
+
+          <div class="case-study__details-body">
+            <section>
+              <h4>What I changed</h4>
+              <ul>
+                @for (step of study.approach; track step) {
+                  <li>{{ step }}</li>
+                }
+              </ul>
+            </section>
+
+            <section>
+              <h4>My role</h4>
+              <p>{{ study.role }}</p>
+            </section>
+
+            @if (study.results.length > 1) {
+              <section>
+                <h4>More measured results</h4>
+                <dl class="case-study__results">
+                  @for (result of study.results; track result.label; let first = $first) {
+                    @if (!first) {
+                      <div>
+                        <dt>{{ result.value }}</dt>
+                        <dd>{{ result.label }}. {{ result.detail }}</dd>
+                      </div>
+                    }
+                  }
+                </dl>
+              </section>
+            }
+
+            <ul class="case-study__stack" aria-label="Tools and practices used">
+              @for (item of study.stack; track item) {
+                <li class="tag">{{ item }}</li>
+              }
+            </ul>
+
+            @if (casePages[study.id]; as casePage) {
+              <a
+                class="case-study__page-link"
+                [href]="casePage"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read the full case study <span aria-hidden="true">↗</span>
+              </a>
+            }
+          </div>
+        </details>
+      </article>
+    }
+  </div>
+
+  <p class="impact-panel__boundary">Customer names and internal system details stay private.</p>
+</section>

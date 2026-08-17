@@ -1,0 +1,93 @@
+<section class="snake-game" aria-labelledby="snake-title">
+  <header class="game-heading">
+    <div>
+      <p class="eyebrow">ARCADE 01</p>
+      <h3 id="snake-title">Snake</h3>
+      <p>Guide the snake to the apples without hitting a wall or your own tail.</p>
+    </div>
+    <div class="scoreboard" aria-label="Score">
+      <span
+        ><small>SCORE</small><strong>{{ state().score }}</strong></span
+      >
+      <span
+        ><small>BEST</small><strong>{{ bestScore() }}</strong></span
+      >
+    </div>
+  </header>
+
+  <div class="game-layout">
+    <div
+      class="snake-board"
+      #gameStage
+      tabindex="0"
+      role="img"
+      [attr.aria-label]="boardLabel()"
+      [attr.data-status]="state().status"
+      [attr.data-direction]="state().direction"
+      [style.--board-size]="state().boardSize"
+    >
+      @for (cell of cells(); track cell.key) {
+        <span class="snake-cell" [attr.data-kind]="cell.kind" aria-hidden="true"></span>
+      }
+
+      @if (state().status !== 'running') {
+        <div class="board-message">
+          @switch (state().status) {
+            @case ('ready') {
+              <strong>Ready?</strong>
+              <span>Arrow keys, WASD, or the buttons.</span>
+              <button class="retro-button retro-button--primary" type="button" (click)="start()">
+                Start
+              </button>
+            }
+            @case ('paused') {
+              <strong>Paused</strong>
+              <button class="retro-button retro-button--primary" type="button" (click)="pause()">
+                Resume
+              </button>
+            }
+            @case ('game-over') {
+              <strong>Game over</strong>
+              <span
+                >You ate {{ state().score }} {{ state().score === 1 ? 'apple' : 'apples' }}.</span
+              >
+              <button class="retro-button retro-button--primary" type="button" (click)="restart()">
+                Play again
+              </button>
+            }
+            @case ('won') {
+              <strong>You win!</strong>
+              <button class="retro-button retro-button--primary" type="button" (click)="restart()">
+                Play again
+              </button>
+            }
+          }
+        </div>
+      }
+    </div>
+
+    <div class="snake-controls" aria-label="Snake controls">
+      <button type="button" aria-label="Move up" (click)="turn('up')">↑</button>
+      <button type="button" aria-label="Move left" (click)="turn('left')">←</button>
+      <button type="button" aria-label="Move down" (click)="turn('down')">↓</button>
+      <button type="button" aria-label="Move right" (click)="turn('right')">→</button>
+    </div>
+  </div>
+
+  <div class="game-actions">
+    <button
+      class="retro-button"
+      type="button"
+      [disabled]="
+        state().status === 'ready' || state().status === 'game-over' || state().status === 'won'
+      "
+      (click)="pause()"
+    >
+      {{ state().status === 'paused' ? 'Resume' : 'Pause' }}
+    </button>
+    <button class="retro-button" type="button" (click)="restart()">Restart</button>
+    <span>Keyboard: arrows or WASD</span>
+  </div>
+
+  <output class="screen-reader-only" aria-live="polite">{{ state().announcement }}</output>
+</section>

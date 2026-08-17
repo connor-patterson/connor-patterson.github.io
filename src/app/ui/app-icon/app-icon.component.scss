@@ -1,0 +1,29 @@
+:host {
+  display: inline-grid;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  color: inherit;
+  place-items: center;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: currentColor;
+}
+
+.app-icon__soft {
+  opacity: 0.2;
+}
+
+.app-icon__accent {
+  color: var(--icon-accent, var(--signal));
+  transition: transform var(--motion-fast) var(--ease-spring-3, ease-out);
+}
+
+:host-context(button:hover) .app-icon__accent,
+:host-context(button:focus-visible) .app-icon__accent {
+  transform: translateY(-1px);
+}

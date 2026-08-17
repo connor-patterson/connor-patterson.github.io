@@ -1,0 +1,81 @@
+<section class="memory-game" aria-labelledby="memory-title">
+  <header class="game-heading">
+    <div>
+      <p class="eyebrow">ARCADE 02</p>
+      <h3 id="memory-title">Memory Match</h3>
+      <p>Flip two cards at a time and find all six matching pairs.</p>
+    </div>
+    <div class="scoreboard" aria-label="Turns">
+      <span
+        ><small>TURNS</small><strong>{{ state().moves }}</strong></span
+      >
+      <span
+        ><small>BEST</small><strong>{{ bestMoves() ?? '—' }}</strong></span
+      >
+    </div>
+  </header>
+
+  <div class="memory-board" [attr.data-status]="state().status" aria-label="Memory cards">
+    @for (card of state().cards; track card.id; let index = $index) {
+      <button
+        #memoryCard
+        class="memory-card"
+        type="button"
+        [class.memory-card--up]="isFaceUp(card)"
+        [class.memory-card--matched]="card.matched"
+        [disabled]="state().status !== 'running' || state().locked || card.matched"
+        [attr.aria-label]="cardLabel(card, index)"
+        [attr.aria-pressed]="isFaceUp(card)"
+        (click)="choose(card.id)"
+      >
+        @if (isFaceUp(card)) {
+          <span class="memory-card__symbol" aria-hidden="true">{{ card.glyph }}</span>
+        } @else {
+          <span class="memory-card__back" aria-hidden="true">?</span>
+        }
+      </button>
+    }
+
+    @if (state().status !== 'running') {
+      <div class="board-message">
+        @switch (state().status) {
+          @case ('ready') {
+            <strong>Ready?</strong>
+            <span>Pick any two cards.</span>
+            <button class="retro-button retro-button--primary" type="button" (click)="start()">
+              Start
+            </button>
+          }
+          @case ('paused') {
+            <strong>Paused</strong>
+            <button class="retro-button retro-button--primary" type="button" (click)="pause()">
+              Resume
+            </button>
+          }
+          @case ('complete') {
+            <strong>You found them all!</strong>
+            <span>{{ state().moves }} turns</span>
+            <button class="retro-button retro-button--primary" type="button" (click)="restart()">
+              Play again
+            </button>
+          }
+        }
+      </div>
+    }
+  </div>
+
+  <div class="game-actions">
+    <button
+      class="retro-button"
+      type="button"
+      [disabled]="state().status === 'ready' || state().status === 'complete'"
+      (click)="pause()"
+    >
+      {{ state().status === 'paused' ? 'Resume' : 'Pause' }}
+    </button>
+    <button class="retro-button" type="button" (click)="restart()">Restart</button>
+    <span>Keyboard: Tab + Enter</span>
+  </div>
+
+  <output class="screen-reader-only" aria-live="polite">{{ state().announcement }}</output>
+</section>

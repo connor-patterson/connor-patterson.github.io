@@ -1,0 +1,32 @@
+<section class="contact-panel" aria-labelledby="contact-heading">
+  <header>
+    <p class="eyebrow">{{ copy.eyebrow }}</p>
+    <h2 id="contact-heading">{{ copy.title }}</h2>
+    <p class="contact-panel__description">{{ copy.description }}</p>
+  </header>
+
+  <address class="contact-panel__links">
+    @for (link of links; track link.href) {
+      <a
+        [href]="link.href"
+        [attr.target]="link.external ? '_blank' : null"
+        [attr.rel]="link.external ? 'noopener noreferrer' : null"
+        [attr.aria-label]="link.ariaLabel"
+      >
+        <span>{{ link.label }}</span>
+        <strong>{{ link.displayValue }}</strong>
+        <i aria-hidden="true">{{ link.external ? '↗' : '→' }}</i>
+      </a>
+    }
+  </address>
+
+  <p class="contact-panel__privacy">{{ copy.privacyNote }}</p>
+
+  <details class="contact-panel__accessibility">
+    <summary>{{ accessibility.title }}</summary>
+    <p>{{ accessibility.description }}</p>
+    <a [href]="accessibility.feedbackLink.href">
+      {{ accessibility.feedbackLink.label }} <span aria-hidden="true">→</span>
+    </a>
+  </details>
+</section>

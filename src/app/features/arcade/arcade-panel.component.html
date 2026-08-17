@@ -1,0 +1,66 @@
+<section class="arcade" aria-labelledby="arcade-title">
+  <span class="screen-reader-only" id="arcade-title">PatterOS Arcade</span>
+  @if (activeView() === 'shelf') {
+    <header class="arcade__intro">
+      <div>
+        <p class="eyebrow">TAKE A QUICK BREAK</p>
+        <h2 #shelfHeading tabindex="-1">PatterOS Arcade</h2>
+        <p>Two familiar games. Pick one and play.</p>
+      </div>
+      <div class="arcade__marquee" aria-hidden="true">
+        <span>PRESS</span>
+        <strong>PLAY</strong>
+      </div>
+    </header>
+
+    <div class="arcade__shelf" aria-label="Available games">
+      @for (game of cartridges; track game.id) {
+        <button
+          class="game-card"
+          type="button"
+          [class.game-card--green]="game.color === 'green'"
+          [attr.aria-label]="'Play ' + game.title + '. ' + game.description"
+          (click)="launch(game)"
+        >
+          <span class="game-card__picture" [attr.data-game]="game.id" aria-hidden="true">
+            @if (game.id === 'snake') {
+              <i></i><i></i><i></i><b></b>
+            } @else {
+              <i>★</i><i>◆</i><i>★</i><i>◆</i>
+            }
+          </span>
+          <span class="game-card__copy">
+            <strong>{{ game.title }}</strong>
+            <span>{{ game.description }}</span>
+          </span>
+          <span class="game-card__action">Play <span aria-hidden="true">→</span></span>
+        </button>
+      }
+    </div>
+
+    <footer class="arcade__footer">
+      <span class="status-dot" aria-hidden="true"></span>
+      <p>Keyboard and touch controls. Scores stay in this browser.</p>
+    </footer>
+  } @else {
+    <header class="arcade__gamebar">
+      <button class="retro-button" type="button" #backButton (click)="returnToShelf()">
+        <span aria-hidden="true">←</span> All games
+      </button>
+      <span>KEYBOARD + TOUCH</span>
+    </header>
+
+    <div class="arcade__game">
+      @switch (activeView()) {
+        @case ('snake') {
+          <app-snake />
+        }
+        @case ('memory-match') {
+          <app-memory-match />
+        }
+      }
+    </div>
+  }
+
+  <span class="screen-reader-only" aria-live="polite">{{ announcement() }}</span>
+</section>

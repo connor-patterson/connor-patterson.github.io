@@ -1,0 +1,101 @@
+<section class="builds-panel" aria-labelledby="builds-heading">
+  <header class="builds-panel__header">
+    <p class="eyebrow">Side projects</p>
+    <h2 id="builds-heading">Things I’m building.</h2>
+    <p>{{ intro }}</p>
+  </header>
+
+  <div class="builds-panel__grid">
+    @for (project of projects; track project.id; let index = $index) {
+      <article
+        class="project-card"
+        [attr.data-accent]="project.accent"
+        [attr.aria-labelledby]="'project-' + project.id"
+      >
+        <span class="project-card__number" aria-hidden="true">0{{ index + 1 }}</span>
+
+        <header>
+          <div>
+            <p class="eyebrow">{{ project.subtitle }}</p>
+            <h3 [id]="'project-' + project.id">{{ project.title }}</h3>
+          </div>
+          <span class="project-card__status">{{ project.status }}</span>
+        </header>
+
+        <p class="project-card__description">{{ project.description }}</p>
+
+        <ul class="project-card__proof" aria-label="Project highlights">
+          @for (item of project.proof; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+
+        <ul class="project-card__stack" aria-label="Project technology">
+          @for (item of project.stack; track item) {
+            <li class="tag">{{ item }}</li>
+          }
+        </ul>
+
+        @if (project.primaryAction; as action) {
+          <div class="project-card__action">
+            @if (action.appId; as appId) {
+              <button
+                class="retro-button retro-button--primary"
+                type="button"
+                (click)="open(appId)"
+              >
+                {{ action.label }}
+              </button>
+            } @else if (action.href; as href) {
+              <a
+                class="retro-button retro-button--primary"
+                [href]="href"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ action.label }} <span aria-hidden="true">↗</span>
+              </a>
+            }
+          </div>
+        }
+
+        @if (details[project.id]; as detail) {
+          <details class="project-card__details">
+            <summary>Architecture and decisions</summary>
+
+            <figure>
+              <img
+                [src]="detail.evidence.src"
+                [alt]="detail.evidence.alt"
+                [width]="detail.evidence.width"
+                [height]="detail.evidence.height"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>{{ detail.evidence.caption }}</figcaption>
+            </figure>
+
+            <dl>
+              <div>
+                <dt>Constraint</dt>
+                <dd>{{ detail.decisionLog.constraint }}</dd>
+              </div>
+              <div>
+                <dt>What I skipped</dt>
+                <dd>{{ detail.decisionLog.rejected }}</dd>
+              </div>
+              <div>
+                <dt>What I chose</dt>
+                <dd>{{ detail.decisionLog.choice }}</dd>
+              </div>
+              <div>
+                <dt>How I checked it</dt>
+                <dd>{{ detail.decisionLog.validation }}</dd>
+              </div>
+            </dl>
+          </details>
+        }
+      </article>
+    }
+  </div>
+</section>

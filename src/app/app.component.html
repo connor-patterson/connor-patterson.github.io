@@ -1,0 +1,235 @@
+@if (booting()) {
+  <section
+    class="boot-screen"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="boot-title"
+    aria-describedby="boot-status"
+  >
+    <div class="boot-screen__card">
+      <app-icon class="boot-screen__mark" name="patter" />
+      <div>
+        <p class="boot-screen__kicker">
+          <span class="patteros-wordmark">Patter<span class="patteros-wordmark__os">OS</span></span>
+        </p>
+        <h2 id="boot-title">Starting up</h2>
+      </div>
+    </div>
+
+    <ul class="boot-screen__checks" id="boot-status">
+      @for (label of bootLabels; track label; let index = $index) {
+        <li [class.boot-screen__check--ready]="bootStep() > index">
+          <span>{{ label }}</span>
+          <strong>{{ bootStep() > index ? 'READY' : 'WAIT' }}</strong>
+        </li>
+      }
+    </ul>
+
+    <div class="boot-screen__progress" aria-hidden="true">
+      @for (label of bootLabels; track label; let index = $index) {
+        <span [class.boot-screen__segment--ready]="bootStep() > index"></span>
+      }
+    </div>
+
+    <button class="boot-screen__skip" type="button" aria-keyshortcuts="Escape" (click)="skipBoot()">
+      Skip boot <span aria-hidden="true">Esc</span>
+    </button>
+  </section>
+}
+
+<div
+  class="os-shell"
+  [class.os-shell--booting]="booting()"
+  [class.os-shell--ready]="!booting()"
+  [attr.inert]="booting() ? '' : null"
+>
+  <a class="skip-link" href="#workspace" (click)="skipToWorkspace($event)"
+    >Skip to portfolio workspace</a
+  >
+
+  <header class="system-bar">
+    <div class="system-bar__identity">
+      <button
+        class="system-bar__mark"
+        type="button"
+        aria-label="Open Start Here"
+        (click)="openApp('start')"
+      >
+        <app-icon name="patter" aria-hidden="true" />
+      </button>
+      <span>
+        <h1>Connor Patterson</h1>
+        <small>Lead Full Stack Software Engineer</small>
+      </span>
+    </div>
+
+    <p class="system-bar__mode">
+      <span class="status-dot" aria-hidden="true"></span>
+      Good software. Curious side quests.
+    </p>
+
+    <div class="system-bar__meta" aria-label="Portfolio status">
+      <span>
+        <strong class="patteros-wordmark"
+          >Patter<span class="patteros-wordmark__os">OS</span></strong
+        >
+        / Connor's desktop
+      </span>
+      <span>
+        {{
+          preferences.theme() === 'day'
+            ? 'DAY SHIFT'
+            : preferences.theme() === 'night'
+              ? 'NIGHT SHIFT'
+              : 'HIGH CONTRAST'
+        }}
+      </span>
+    </div>
+  </header>
+
+  <main
+    class="desktop-stage"
+    id="workspace"
+    tabindex="-1"
+    (pointermove)="handleDesktopPointerMove($event)"
+    (pointerleave)="handleDesktopPointerLeave($event)"
+    (pointerdown)="handleDesktopPointerDown($event)"
+  >
+    <div class="desktop-stage__signal-field" aria-hidden="true" data-testid="signal-field">
+      @for (ripple of desktopRipples(); track ripple.id) {
+        <i
+          class="desktop-stage__signal-ripple"
+          [style.left.px]="ripple.x"
+          [style.top.px]="ripple.y"
+        ></i>
+      }
+    </div>
+    <div class="desktop-stage__ambient" aria-hidden="true">
+      <span>BUILD 2026.08</span>
+      <strong>OPEN A WINDOW. POKE AROUND.</strong>
+    </div>
+
+    <nav class="desktop-stage__shortcuts desktop-icon-cluster" aria-label="Desktop shortcuts">
+      @if (!booting()) {
+        @for (app of desktopApps; track app.id; let index = $index) {
+          <app-desktop-shortcut
+            [app]="app"
+            [style.--launch-index]="index"
+            (launch)="openFromShortcut($event)"
+          />
+        }
+      }
+    </nav>
+
+    <section class="desktop-stage__windows" aria-label="Open portfolio applications">
+      @if (!booting()) {
+        @for (window of windows.openWindows(); track window.definition.id) {
+          <app-window-frame
+            [app]="window.definition"
+            [state]="window.state"
+            [compact]="compact() || preferences.readingMode()"
+            [active]="windows.activeId() === window.definition.id"
+            (focused)="windows.focus($event)"
+            (closeRequested)="closeApp($event)"
+            (minimizeRequested)="minimizeApp($event)"
+            (maximizeRequested)="toggleMaximize($event)"
+            (shareRequested)="copyWindowLink($event)"
+            (moved)="windows.move($event.id, $event.position)"
+            (resized)="windows.resize($event.id, $event.size)"
+          >
+            @switch (window.definition.id) {
+              @case ('start') {
+                <app-start-panel (openApp)="openApp($event)" />
+              }
+              @case ('impact') {
+                @defer (on immediate) {
+                  <app-impact-panel />
+                } @placeholder {
+                  <div class="feature-loader" role="status">Opening Work Log…</div>
+                }
+              }
+              @case ('builds') {
+                @defer (on immediate) {
+                  <app-builds-panel (openApp)="openApp($event)" />
+                } @placeholder {
+                  <div class="feature-loader" role="status">Opening Builds…</div>
+                }
+              }
+              @case ('arcade') {
+                @if (lazyComponents().arcade; as component) {
+                  <ng-container *ngComponentOutlet="component" />
+                } @else {
+                  <div class="feature-loader" role="status">
+                    <span class="feature-loader__cartridge" aria-hidden="true">▣</span>
+                    <div>
+                      <strong>Loading the game cabinet…</strong>
+                      <small>One moment while the fun bits click into place.</small>
+                    </div>
+                  </div>
+                }
+              }
+              @case ('profile') {
+                @defer (on immediate) {
+                  <app-profile-panel />
+                } @placeholder {
+                  <div class="feature-loader" role="status">Opening About Connor…</div>
+                }
+              }
+              @case ('resume') {
+                @defer (on immediate) {
+                  <app-resume-panel />
+                } @placeholder {
+                  <div class="feature-loader" role="status">Opening the résumé…</div>
+                }
+              }
+              @case ('contact') {
+                @defer (on immediate) {
+                  <app-contact-panel />
+                } @placeholder {
+                  <div class="feature-loader" role="status">Opening Say Hello…</div>
+                }
+              }
+              @case ('settings') {
+                @if (lazyComponents().settings; as component) {
+                  <ng-container *ngComponentOutlet="component" />
+                } @else {
+                  <div class="feature-loader" role="status">Loading display controls…</div>
+                }
+              }
+            }
+          </app-window-frame>
+        }
+      }
+    </section>
+
+    <router-outlet />
+  </main>
+
+  @if (launcherOpen()) {
+    <app-launcher-menu
+      [apps]="apps"
+      [theme]="preferences.theme()"
+      (launch)="openFromLauncher($event)"
+      (shutdown)="closeLauncher(true)"
+    />
+  }
+
+  <app-taskbar
+    [windows]="windows.openWindows()"
+    [activeId]="windows.activeId()"
+    [launcherOpen]="launcherOpen()"
+    [theme]="preferences.theme()"
+    (launcherToggled)="toggleLauncher()"
+    (windowSelected)="selectTaskbarWindow($event)"
+    (themeToggled)="preferences.toggleTheme()"
+  />
+
+  @if (toast(); as message) {
+    <div class="os-toast" aria-hidden="true">
+      <app-icon name="patter" />
+      <span>{{ message }}</span>
+    </div>
+  }
+
+  <p class="screen-reader-only" aria-live="polite">{{ announcement() }}</p>
+</div>

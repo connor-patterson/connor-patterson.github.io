@@ -1,0 +1,114 @@
+:host {
+  display: block;
+}
+
+.resume-panel {
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.resume-panel h2,
+.resume-panel p {
+  margin-top: 0;
+}
+
+.resume-panel h2 {
+  max-width: 14ch;
+  margin-bottom: 0.65rem;
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.resume-panel__description {
+  max-width: 58ch;
+  margin-bottom: 0;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.resume-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.resume-panel__actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.resume-panel__more {
+  padding: 0 1rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-mid);
+}
+
+.resume-panel__more summary {
+  min-height: 2.75rem;
+  padding: 0.75rem 0.15rem;
+  color: var(--signal-strong);
+  cursor: pointer;
+  font-family: var(--font-interface);
+  font-size: 0.86rem;
+  font-weight: 720;
+}
+
+.resume-panel__highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0 0 0.75rem;
+}
+
+.resume-panel__highlights div {
+  min-width: 0;
+  padding: 0.7rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-mid);
+}
+
+.resume-panel__highlights dt {
+  color: var(--signal-strong);
+  font-family: var(--font-interface);
+  font-size: 0.7rem;
+}
+
+.resume-panel__highlights dd {
+  margin: 0.3rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 680;
+  line-height: 1.4;
+}
+
+.resume-panel__brief {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  color: var(--signal-strong);
+  font-family: var(--font-interface);
+  font-size: 0.8rem;
+  font-weight: 720;
+}
+
+.resume-panel__privacy {
+  margin-bottom: 0;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 430px) {
+  .resume-panel__actions > * {
+    width: 100%;
+  }
+
+  .resume-panel__highlights {
+    grid-template-columns: 1fr;
+  }
+}

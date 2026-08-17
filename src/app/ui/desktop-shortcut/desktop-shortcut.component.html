@@ -1,0 +1,12 @@
+<button
+  class="desktop-shortcut"
+  [id]="'shortcut-' + app().id"
+  type="button"
+  [attr.aria-label]="'Open ' + app().label + ': ' + app().description"
+  (click)="launch.emit(app().id)"
+>
+  <span class="desktop-shortcut__icon" [attr.data-kind]="app().kind" aria-hidden="true">
+    <app-icon [name]="app().icon" />
+  </span>
+  <span class="desktop-shortcut__label">{{ app().shortcutLabel }}</span>
+</button>

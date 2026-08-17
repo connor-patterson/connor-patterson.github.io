@@ -1,0 +1,18 @@
+{
+  "name": "PatterOS",
+  "short_name": "PatterOS",
+  "description": "Connor Patterson's personal desktop with work, notes, and games.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0d2532",
+  "theme_color": "#163c73",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

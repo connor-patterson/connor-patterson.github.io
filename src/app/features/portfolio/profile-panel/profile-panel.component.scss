@@ -1,0 +1,117 @@
+:host {
+  display: block;
+}
+
+.profile-panel {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.profile-panel h2,
+.profile-panel h3,
+.profile-panel p {
+  margin-top: 0;
+}
+
+.profile-panel__header {
+  max-width: 68ch;
+  padding: clamp(1rem, 3vw, 1.4rem);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-mid);
+}
+
+.profile-panel h2 {
+  max-width: 18ch;
+  margin-bottom: 0.85rem;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.profile-panel__header p:not(.eyebrow) {
+  margin-bottom: 0.55rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.profile-panel__header p:last-child {
+  margin-bottom: 0;
+}
+
+.profile-panel__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.profile-panel__facts div {
+  min-width: 0;
+  padding: 0.8rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-mid);
+}
+
+.profile-panel__facts dt {
+  color: var(--signal-strong);
+  font-family: var(--font-interface);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profile-panel__facts dd {
+  margin: 0.35rem 0 0;
+  font-size: 0.86rem;
+  font-weight: 680;
+  line-height: 1.4;
+}
+
+.profile-panel__capabilities {
+  padding: 0 1rem;
+  background: color-mix(in srgb, var(--surface-sunken), transparent 42%);
+  border: 1px solid var(--border-mid);
+}
+
+.profile-panel__capabilities summary {
+  min-height: 2.75rem;
+  padding: 0.75rem 0.15rem;
+  color: var(--signal-strong);
+  cursor: pointer;
+  font-family: var(--font-interface);
+  font-size: 0.86rem;
+  font-weight: 720;
+}
+
+.profile-panel__capability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding-bottom: 1rem;
+}
+
+.profile-panel__capability-grid section {
+  padding: 0.75rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-mid);
+}
+
+.profile-panel__capability-grid h3 {
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.profile-panel__capability-grid p {
+  margin-bottom: 0;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 560px) {
+  .profile-panel__facts,
+  .profile-panel__capability-grid {
+    grid-template-columns: 1fr;
+  }
+}

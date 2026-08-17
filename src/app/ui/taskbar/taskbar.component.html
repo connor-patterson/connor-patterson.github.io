@@ -1,0 +1,57 @@
+<footer class="taskbar" aria-label="PatterOS taskbar">
+  <button
+    class="taskbar__start"
+    id="taskbar-launcher"
+    type="button"
+    aria-label="Open application launcher"
+    [attr.aria-expanded]="launcherOpen()"
+    aria-controls="launcher-menu"
+    (click)="launcherToggled.emit()"
+  >
+    <span class="taskbar__start-mark" aria-hidden="true"><app-icon name="patter" /></span>
+    <span>Launch</span>
+  </button>
+
+  <div class="taskbar__windows" aria-label="Open applications">
+    @for (window of windows(); track window.definition.id) {
+      <button
+        class="taskbar__window"
+        type="button"
+        [attr.aria-label]="
+          (activeId() === window.definition.id && !window.state.isMinimized
+            ? 'Minimize '
+            : window.state.isMinimized
+              ? 'Restore '
+              : 'Select ') + window.definition.label
+        "
+        [class.taskbar__window--active]="
+          activeId() === window.definition.id && !window.state.isMinimized
+        "
+        [attr.aria-pressed]="activeId() === window.definition.id && !window.state.isMinimized"
+        (click)="windowSelected.emit(window.definition.id)"
+      >
+        <app-icon [name]="window.definition.icon" aria-hidden="true" />
+        <span>{{ window.definition.taskbarLabel }}</span>
+      </button>
+    }
+  </div>
+
+  <div class="taskbar__tray">
+    <button
+      class="taskbar__theme"
+      type="button"
+      [attr.aria-label]="theme() === 'day' ? 'Switch to Night Shift' : 'Switch to Day Shift'"
+      (click)="themeToggled.emit()"
+    >
+      <span aria-hidden="true">{{ theme() === 'day' ? '☾' : '☀' }}</span>
+    </button>
+    <time
+      [attr.datetime]="dateTime()"
+      [attr.title]="clockLabel()"
+      [attr.aria-label]="clockLabel() + '. Time zone: ' + timezone"
+    >
+      <strong>{{ time() }}</strong>
+      <small>{{ date() }}</small>
+    </time>
+  </div>
+</footer>
