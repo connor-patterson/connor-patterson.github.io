@@ -132,20 +132,25 @@ body.crt-screen::after {
   pointer-events: none;
 }
 
-.crt-glass {
-  position: fixed;
-  z-index: 9997;
-  inset: 0;
-  display: none;
+.desktop-stage__fisheye {
+  position: absolute;
+  z-index: 900;
+  top: var(--signal-y);
+  left: var(--signal-x);
+  width: clamp(7.5rem, 13vw, 10rem);
+  aspect-ratio: 1;
   background: rgb(255 255 255 / 0.1%);
+  border-radius: 50%;
+  opacity: 0;
   pointer-events: none;
+  translate: -50% -50%;
   backdrop-filter: url('#desktop-fisheye');
-  contain: strict;
-  transform: translateZ(0);
+  mask-image: radial-gradient(circle, #000 0 72%, transparent 100%);
+  will-change: translate;
 }
 
-body.crt-screen .crt-glass {
-  display: block;
+body.crt-screen .desktop-stage:hover > .desktop-stage__fisheye {
+  opacity: var(--crt-strength);
 }
 
 body.crt-screen::before {
@@ -465,6 +470,10 @@ a:hover {
 }
 
 @media (max-width: 1180px) {
+  .desktop-stage__fisheye {
+    display: none;
+  }
+
   body {
     overflow-y: auto;
   }
@@ -496,7 +505,13 @@ a:hover {
     display: none;
   }
 
-  .crt-glass {
+  .desktop-stage__fisheye {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-stage__fisheye {
     display: none;
   }
 }
