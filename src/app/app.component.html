@@ -1,12 +1,12 @@
 <svg class="lens-filter-definitions" aria-hidden="true" focusable="false">
   <filter id="desktop-fisheye" x="-20%" y="-20%" width="140%" height="140%">
-    <feImage href="assets/fisheye-map.svg" preserveAspectRatio="none" result="map" />
+    <feImage href="assets/fisheye-map.png" preserveAspectRatio="none" result="map" />
     <feDisplacementMap
       in="SourceGraphic"
       in2="map"
       xChannelSelector="R"
       yChannelSelector="G"
-      [attr.scale]="preferences.crtIntensity() * 0.05"
+      [attr.scale]="preferences.crtIntensity() * 0.22"
     />
   </filter>
 </svg>
@@ -113,7 +113,6 @@
         ></i>
       }
     </div>
-    <div class="desktop-stage__fisheye" aria-hidden="true"></div>
     <div class="desktop-stage__ambient" aria-hidden="true">
       <span>BUILD 2026.08</span>
       <strong>OPEN A WINDOW. POKE AROUND.</strong>
@@ -271,3 +270,5 @@
 
   <p class="screen-reader-only" aria-live="polite">{{ announcement() }}</p>
 </div>
+
+<div class="crt-glass" aria-hidden="true"></div>
