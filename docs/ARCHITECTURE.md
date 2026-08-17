@@ -85,7 +85,7 @@ Constraints:
 
 ### Preferences
 
-`PreferencesService` owns Day Shift, Night Shift, High Contrast, CRT texture intensity, motion, and Comfortable Reading. CRT texture intensity defaults to 100 and drives scanline, fringe, highlight, and screen-wide glass-curvature overlays. The curvature layer uses one high-resolution static radial field with a continuous falloff and never moves with the pointer, so the application tree is not repeatedly filtered during mouse movement. Values are stored under a versioned local storage key. Storage failures are nonfatal.
+`PreferencesService` owns Day Shift, Night Shift, High Contrast, CRT texture intensity, motion, and Comfortable Reading. CRT texture intensity defaults to 100 and drives scanline, fringe, highlight, and screen-wide glass-curvature overlays. The curvature layer uses one small static displacement map and never moves with the pointer, so the application tree is not repeatedly filtered during mouse movement. Values are stored under a versioned local storage key. Storage failures are nonfatal.
 
 The operating system reduced motion preference wins on initial load. The UI does not reenable animation against that preference without an explicit user action. Comfortable Reading stacks open windows, disables drag-only controls, and increases text spacing without introducing a second content model.
 

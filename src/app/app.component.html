@@ -1,24 +1,12 @@
 <svg class="lens-filter-definitions" aria-hidden="true" focusable="false">
-  <filter
-    id="desktop-fisheye"
-    x="-20%"
-    y="-20%"
-    width="140%"
-    height="140%"
-    color-interpolation-filters="sRGB"
-  >
-    <feImage
-      href="assets/fisheye-map.png"
-      preserveAspectRatio="none"
-      image-rendering="optimizeQuality"
-      result="map"
-    />
+  <filter id="desktop-fisheye" x="-20%" y="-20%" width="140%" height="140%">
+    <feImage href="assets/fisheye-map.png" preserveAspectRatio="none" result="map" />
     <feDisplacementMap
       in="SourceGraphic"
       in2="map"
       xChannelSelector="R"
       yChannelSelector="G"
-      [attr.scale]="preferences.crtIntensity() * 0.36"
+      [attr.scale]="preferences.crtIntensity() * 0.22"
     />
   </filter>
 </svg>
