@@ -1,3 +1,16 @@
+<svg class="crt-filter-definitions" aria-hidden="true" focusable="false">
+  <filter id="crt-fisheye">
+    <feImage href="assets/crt-displacement.svg" preserveAspectRatio="none" result="d" />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="d"
+      xChannelSelector="R"
+      yChannelSelector="G"
+      [attr.scale]="crtWarp()"
+    />
+  </filter>
+</svg>
+
 @if (booting()) {
   <section
     class="boot-screen"
@@ -37,6 +50,7 @@
   class="os-shell"
   [class.os-shell--booting]="booting()"
   [class.os-shell--ready]="!booting()"
+  [class.os-shell--crt]="preferences.crtIntensity() > 0"
   [attr.inert]="booting() ? '' : null"
 >
   <a class="skip-link" href="#workspace" (click)="skipToWorkspace($event)"

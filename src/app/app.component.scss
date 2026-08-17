@@ -142,7 +142,18 @@
   translate: 0 -160%;
 }
 
+.skip-link:not(:focus) {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .skip-link:focus {
+  width: auto;
+  height: auto;
+  clip-path: none;
   translate: 0;
 }
 
@@ -150,6 +161,18 @@
   display: grid;
   min-height: 100dvh;
   grid-template-rows: auto minmax(0, 1fr);
+}
+
+.crt-filter-definitions {
+  position: fixed;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.os-shell--crt {
+  filter: url('#crt-fisheye');
 }
 
 .system-bar {

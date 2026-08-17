@@ -85,7 +85,9 @@ Constraints:
 
 ### Preferences
 
-`PreferencesService` owns Day Shift, Night Shift, High Contrast, CRT intensity, motion, and Comfortable Reading. CRT intensity defaults to 100 and drives presentation-only overlay variables, so it does not distort pointer geometry or window calculations. Values are stored under a versioned local storage key. Storage failures are nonfatal.
+`PreferencesService` owns Day Shift, Night Shift, High Contrast, CRT intensity, motion, and Comfortable Reading. CRT intensity defaults to 100 and drives a top-level SVG displacement filter plus presentation-only overlay variables. The distortion stays in the rendering layer, so window state and calculations retain stable coordinates. Values are stored under a versioned local storage key. Storage failures are nonfatal.
+
+The production build keeps a 405 kB initial warning budget and a 650 kB error budget. The displacement map is a small static asset rather than initial JavaScript.
 
 The operating system reduced motion preference wins on initial load. The UI does not reenable animation against that preference without an explicit user action. Comfortable Reading stacks open windows, disables drag-only controls, and increases text spacing without introducing a second content model.
 
