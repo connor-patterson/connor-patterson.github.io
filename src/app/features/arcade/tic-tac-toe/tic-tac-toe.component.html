@@ -1,0 +1,31 @@
+<section class="ttt" aria-labelledby="ttt-title">
+  <header>
+    <div>
+      <p class="eyebrow">ARCADE 03</p>
+      <h3 id="ttt-title">Tic Tac Toe</h3>
+      <p>A quick round against the desktop.</p>
+    </div>
+    <div class="ttt__wins">
+      <small>WINS</small><strong>{{ gamesWon() }}</strong>
+    </div>
+  </header>
+
+  <p class="ttt__status" aria-live="polite">{{ statusText() }}</p>
+  <div class="ttt__board" role="group" aria-label="Tic Tac Toe board">
+    @for (cell of board(); track $index) {
+      <button
+        type="button"
+        [disabled]="cell !== null || status() !== 'playing'"
+        [attr.aria-label]="
+          cell ? 'Square ' + ($index + 1) + ': ' + cell : 'Choose square ' + ($index + 1)
+        "
+        (click)="choose($index)"
+      >
+        <span aria-hidden="true">{{ cell }}</span>
+      </button>
+    }
+  </div>
+  <button class="retro-button retro-button--primary" type="button" (click)="restart()">
+    New round
+  </button>
+</section>

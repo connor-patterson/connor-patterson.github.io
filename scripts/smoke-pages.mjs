@@ -138,8 +138,8 @@ try {
     'Skip boot did not reveal the desktop.',
   );
   assert(
-    (await page.locator('app-desktop-shortcut').count()) === 8,
-    'The eight-app desktop did not mount after boot.',
+    (await page.locator('app-desktop-shortcut').count()) === 10,
+    'The ten-app desktop did not mount after boot.',
   );
   const signalField = page.getByTestId('signal-field');
   assert(
@@ -153,6 +153,16 @@ try {
   });
   await page.waitForFunction(
     () => document.querySelector('.desktop-stage')?.style.getPropertyValue('--signal-x') !== '',
+  );
+  const signalPosition = await page
+    .locator('.desktop-stage')
+    .evaluate((element) => element.style.getPropertyValue('--signal-x'));
+  await page.locator('.desktop-stage').dispatchEvent('pointerleave', { pointerType: 'mouse' });
+  assert(
+    (await page
+      .locator('.desktop-stage')
+      .evaluate((element) => element.style.getPropertyValue('--signal-x'))) === signalPosition,
+    'The desktop spotlight reset after the pointer left the workspace.',
   );
   await page.locator('.desktop-stage').dispatchEvent('pointerdown', {
     button: 0,
@@ -228,8 +238,8 @@ try {
       viewport.width <= 1180,
     );
     assert(
-      (await page.locator('app-desktop-shortcut').count()) === 8,
-      `${viewport.width}x${viewport.height}: expected exactly eight desktop shortcuts.`,
+      (await page.locator('app-desktop-shortcut').count()) === 10,
+      `${viewport.width}x${viewport.height}: expected exactly ten desktop shortcuts.`,
     );
 
     if (viewport.width === 320) {
@@ -356,7 +366,7 @@ try {
   }
 
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.evaluate(() => localStorage.removeItem('patteros.window-layout.v2'));
+  await page.evaluate(() => localStorage.removeItem('patteros.window-layout.v3'));
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.locator('.boot-screen').waitFor({ state: 'visible' });
   await page.getByRole('button', { name: /Skip boot/ }).click();
@@ -368,7 +378,7 @@ try {
   await page.locator('#window-builds .window-frame__preset').selectOption('cozy');
   await page.getByRole('button', { name: 'Close Builds' }).click();
   const preferredDesktopLayout = await page.evaluate(() =>
-    JSON.parse(localStorage.getItem('patteros.window-layout.v2') ?? 'null'),
+    JSON.parse(localStorage.getItem('patteros.window-layout.v3') ?? 'null'),
   );
   await page.setViewportSize({ width: 320, height: 800 });
   await page.waitForFunction(() =>
@@ -376,7 +386,7 @@ try {
   );
   await page.waitForTimeout(100);
   const compactStoredLayout = await page.evaluate(() =>
-    JSON.parse(localStorage.getItem('patteros.window-layout.v2') ?? 'null'),
+    JSON.parse(localStorage.getItem('patteros.window-layout.v3') ?? 'null'),
   );
   assert(
     JSON.stringify(compactStoredLayout?.windows?.start?.size) ===
@@ -394,7 +404,7 @@ try {
   );
   await page.waitForTimeout(100);
   const restoredDesktopLayout = await page.evaluate(() =>
-    JSON.parse(localStorage.getItem('patteros.window-layout.v2') ?? 'null'),
+    JSON.parse(localStorage.getItem('patteros.window-layout.v3') ?? 'null'),
   );
   assert(
     JSON.stringify(restoredDesktopLayout?.windows?.start?.size) ===
@@ -476,9 +486,9 @@ try {
     'The keyboard resize handle did not make the window wider.',
   );
   const storedLayout = await page.evaluate(() =>
-    JSON.parse(localStorage.getItem('patteros.window-layout.v2') ?? 'null'),
+    JSON.parse(localStorage.getItem('patteros.window-layout.v3') ?? 'null'),
   );
-  assert(storedLayout?.version === 2, 'The saved window layout does not use schema version 2.');
+  assert(storedLayout?.version === 3, 'The saved window layout does not use schema version 3.');
   assert(
     storedLayout?.windows?.start?.size?.width === widthAfterKeyboardResize,
     'The resized window width was not saved locally.',
@@ -640,8 +650,29 @@ try {
   );
 
   await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(`${origin}#/systems`, { waitUntil: 'domcontentloaded' });
+  await page.getByRole('heading', { name: 'Follow a change from screen to release.' }).waitFor();
+  await page.getByRole('button', { name: 'Services' }).click();
+  await page.getByRole('heading', { name: 'Clear boundaries, boring failure modes' }).waitFor();
+
+  await page.goto(`${origin}#/github`, { waitUntil: 'domcontentloaded' });
+  await page.getByRole('heading', { name: 'Public code, without leaving the desktop.' }).waitFor();
+  const githubProfileLink = page.getByRole('link', { name: /Open profile/ });
+  assert(
+    (await githubProfileLink.getAttribute('rel')) === 'noopener noreferrer',
+    'The live GitHub window has an unsafe external profile link.',
+  );
+
   await page.goto(`${origin}#/arcade`, { waitUntil: 'domcontentloaded' });
   await page.getByRole('heading', { name: 'PatterOS Arcade', exact: true }).waitFor();
+  const arcadeWindowSize = await page.locator('#window-arcade').evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    return { width: bounds.width, height: bounds.height };
+  });
+  assert(
+    arcadeWindowSize.width >= 1_000 && arcadeWindowSize.height >= 700,
+    'The arcade did not open at a legible desktop size.',
+  );
   await page.getByRole('button', { name: /^Play Snake\./ }).click();
   await page.getByRole('heading', { name: 'Snake', exact: true }).waitFor();
   assert(
@@ -727,6 +758,33 @@ try {
     (await memory.locator('.scoreboard strong').first().innerText()) === '0',
     'Restarting Memory Match did not reset its turn count.',
   );
+
+  await page.getByRole('button', { name: 'All games' }).click();
+  await page.getByRole('button', { name: /^Play Tic Tac Toe\./ }).click();
+  const ticTacToe = page.locator('.ttt');
+  await ticTacToe.getByRole('button', { name: 'Choose square 1' }).click();
+  assert(
+    (
+      await ticTacToe
+        .locator('.ttt__board button')
+        .evaluateAll((buttons) =>
+          buttons
+            .filter((button) => button.textContent?.trim())
+            .map((button) => button.textContent?.trim()),
+        )
+    ).length >= 2,
+    'Tic Tac Toe did not answer the player move.',
+  );
+
+  await page.getByRole('button', { name: 'All games' }).click();
+  await page.getByRole('button', { name: /^Play Minesweeper\./ }).click();
+  const minesweeper = page.locator('.mines');
+  await minesweeper.getByRole('button', { name: 'Reveal cell 1', exact: true }).click();
+  assert(
+    (await minesweeper.locator('.mines__cell--mine').count()) === 0,
+    'Minesweeper did not keep the first move safe.',
+  );
+  await minesweeper.getByRole('button', { name: 'New board' }).click();
 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   const reducedBootStarted = Date.now();

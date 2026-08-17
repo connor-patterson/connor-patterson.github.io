@@ -1,5 +1,14 @@
 export type AppId =
-  'start' | 'impact' | 'builds' | 'arcade' | 'profile' | 'resume' | 'contact' | 'settings';
+  | 'start'
+  | 'impact'
+  | 'builds'
+  | 'systems'
+  | 'github'
+  | 'arcade'
+  | 'profile'
+  | 'resume'
+  | 'contact'
+  | 'settings';
 
 export type AppKind = 'system' | 'work' | 'project' | 'arcade' | 'utility';
 
@@ -88,10 +97,10 @@ export interface ProjectCard {
 }
 
 export interface ArcadeCartridge {
-  readonly id: 'snake' | 'memory-match';
+  readonly id: 'snake' | 'memory-match' | 'tic-tac-toe' | 'minesweeper';
   readonly title: string;
   readonly shortTitle: string;
   readonly description: string;
   readonly skills: readonly string[];
-  readonly color: 'orange' | 'green';
+  readonly color: 'orange' | 'green' | 'blue' | 'violet';
 }

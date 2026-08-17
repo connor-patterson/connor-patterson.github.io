@@ -64,7 +64,7 @@ export class SnakeComponent implements OnDestroy {
     return cells;
   });
   protected readonly boardLabel = computed(
-    () => `Snake board. Score ${this.state().score}. Use arrow keys or the direction buttons.`,
+    () => `Snake board. Score ${this.state().score}. Use WASD or the direction buttons.`,
   );
 
   private readonly gameStage = viewChild<ElementRef<HTMLElement>>('gameStage');

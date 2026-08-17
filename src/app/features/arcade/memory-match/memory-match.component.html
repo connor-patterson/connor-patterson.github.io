@@ -74,7 +74,6 @@
       {{ state().status === 'paused' ? 'Resume' : 'Pause' }}
     </button>
     <button class="retro-button" type="button" (click)="restart()">Restart</button>
-    <span>Keyboard: Tab + Enter</span>
   </div>
 
   <output class="screen-reader-only" aria-live="polite">{{ state().announcement }}</output>

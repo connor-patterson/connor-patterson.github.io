@@ -1,0 +1,48 @@
+<section class="systems" aria-labelledby="systems-heading">
+  <header class="systems__header">
+    <p class="eyebrow">System Explorer</p>
+    <h2 id="systems-heading">Follow a change from screen to release.</h2>
+    <p>Pick a layer to see the decisions I care about when the code has to live in production.</p>
+  </header>
+
+  <div class="systems__map" role="group" aria-label="System layers">
+    @for (layer of layers; track layer.id; let last = $last) {
+      <button
+        type="button"
+        [class.systems__node--active]="selectedId() === layer.id"
+        [attr.aria-pressed]="selectedId() === layer.id"
+        (click)="selectedId.set(layer.id)"
+      >
+        <span>{{ $index + 1 }}</span>
+        <strong>{{ layer.label }}</strong>
+      </button>
+      @if (!last) {
+        <i aria-hidden="true">→</i>
+      }
+    }
+  </div>
+
+  @if (selectedLayer(); as layer) {
+    <article class="systems__detail" aria-live="polite">
+      <div class="systems__copy">
+        <p class="eyebrow">{{ layer.eyebrow }}</p>
+        <h3>{{ layer.title }}</h3>
+        <p>{{ layer.summary }}</p>
+        <ul>
+          @for (decision of layer.decisions; track decision) {
+            <li>{{ decision }}</li>
+          }
+        </ul>
+      </div>
+      <aside>
+        <span>FROM MY WORK LOG</span>
+        <p>{{ layer.proof }}</p>
+        <ul aria-label="Relevant tools">
+          @for (tool of layer.tools; track tool) {
+            <li class="tag">{{ tool }}</li>
+          }
+        </ul>
+      </aside>
+    </article>
+  }
+</section>

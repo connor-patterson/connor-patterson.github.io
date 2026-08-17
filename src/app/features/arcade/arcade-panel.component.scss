@@ -112,17 +112,28 @@
   place-items: center;
 }
 
-.game-card--green .game-card__picture {
+.game-card[data-color='green'] .game-card__picture {
   color: #fff1c2;
   background: #1d303b;
 }
 
-.game-card__picture[data-game='snake'] {
-  grid-template-columns: repeat(4, 2rem);
-  align-content: center;
+.game-card[data-color='blue'] .game-card__picture {
+  color: #d8f4ff;
+  background: #15364a;
+}
+.game-card[data-color='violet'] .game-card__picture {
+  color: #f8e8ff;
+  background: #31243d;
 }
 
-.game-card__picture[data-game='snake'] i {
+.preview-snake {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 2rem);
+  align-items: center;
+}
+
+.preview-snake i {
   display: block;
   width: 2.1rem;
   height: 2.1rem;
@@ -131,12 +142,12 @@
   border-radius: 0.6rem;
 }
 
-.game-card__picture[data-game='snake'] i:first-child {
+.preview-snake i:first-child {
   position: relative;
 }
 
-.game-card__picture[data-game='snake'] i:first-child::before,
-.game-card__picture[data-game='snake'] i:first-child::after {
+.preview-snake i:first-child::before,
+.preview-snake i:first-child::after {
   position: absolute;
   width: 0.25rem;
   height: 0.25rem;
@@ -147,12 +158,12 @@
   top: 0.35rem;
 }
 
-.game-card__picture[data-game='snake'] i:first-child::after {
+.preview-snake i:first-child::after {
   bottom: 0.35rem;
   top: auto;
 }
 
-.game-card__picture[data-game='snake'] b {
+.preview-snake b {
   position: absolute;
   width: 1.5rem;
   aspect-ratio: 1;
@@ -161,6 +172,38 @@
   border-radius: 50%;
   right: 12%;
   top: 22%;
+}
+
+.preview-ttt,
+.preview-mines {
+  display: grid;
+  width: min(12rem, 80%);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+}
+.preview-ttt i,
+.preview-mines i {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #162834;
+  background: #f6edce;
+  border: 1px solid #756a50;
+  font-family: var(--font-interface);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 900;
+}
+.preview-mines {
+  grid-template-columns: repeat(4, 1fr);
+}
+.preview-mines i {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.preview-mines i:nth-child(4) {
+  color: #fff;
+  background: #7d4c9d;
 }
 
 .game-card__picture[data-game='memory-match'] {
@@ -278,8 +321,10 @@
 @media (forced-colors: active) {
   .game-card,
   .game-card__picture,
-  .game-card__picture[data-game='snake'] i,
-  .game-card__picture[data-game='memory-match'] i {
+  .preview-snake i,
+  .game-card__picture[data-game='memory-match'] i,
+  .preview-ttt i,
+  .preview-mines i {
     color: ButtonText;
     background: ButtonFace;
     border-color: ButtonText;

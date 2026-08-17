@@ -1,0 +1,111 @@
+:host {
+  display: block;
+}
+.mines {
+  display: grid;
+  max-width: 46rem;
+  gap: 0.9rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.6rem);
+}
+.mines header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.mines h3 {
+  margin: 0;
+  font-family: var(--font-interface);
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1;
+}
+.mines header p:not(.eyebrow) {
+  margin: 0.5rem 0 0;
+  color: var(--ink-muted);
+}
+.mines__counter {
+  display: grid;
+  min-width: 5rem;
+  align-content: center;
+  justify-items: center;
+  padding: 0.55rem;
+  color: #ffefc1;
+  background: #241b2c;
+  border: 2px solid #100b15;
+  font-family: var(--font-mono);
+}
+.mines__counter small {
+  font-size: 0.6rem;
+}
+.mines__counter strong {
+  font-size: 1.5rem;
+}
+.mines__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-weight: 800;
+}
+.mines__board {
+  display: grid;
+  width: min(100%, 37rem);
+  aspect-ratio: 1;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  padding: 4px;
+  justify-self: center;
+  background: #544b5b;
+  border: 3px solid #211a26;
+}
+.mines__board button {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  place-items: center;
+  color: #17211d;
+  background: #d9d0be;
+  border: 2px solid;
+  border-color: #fffbed #625b50 #625b50 #fffbed;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 2vw, 1rem);
+  font-weight: 900;
+}
+.mines__board button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.mines__board .mines__cell--revealed {
+  background: #eee8da;
+  border: 1px solid #91897b;
+}
+.mines__board .mines__cell--mine {
+  color: #fff;
+  background: #b24141;
+}
+.mines__board .mines__cell--flagged {
+  color: #fff;
+  background: #3e3160;
+}
+.mines > .retro-button {
+  justify-self: center;
+}
+@media (max-width: 460px) {
+  .mines__board {
+    gap: 1px;
+    padding: 2px;
+  }
+  .mines__board button {
+    border-width: 1px;
+  }
+}
+@media (forced-colors: active) {
+  .mines__board,
+  .mines__board button {
+    color: CanvasText;
+    background: Canvas;
+    border-color: CanvasText;
+  }
+}

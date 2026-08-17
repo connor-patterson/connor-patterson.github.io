@@ -31,6 +31,8 @@ describe('application registry', () => {
       'start',
       'impact',
       'builds',
+      'systems',
+      'github',
       'arcade',
       'profile',
       'resume',
@@ -40,7 +42,12 @@ describe('application registry', () => {
   });
 
   it('keeps the arcade choices familiar and plainly named', () => {
-    expect(ARCADE_CARTRIDGES.map((game) => game.title)).toEqual(['Snake', 'Memory Match']);
+    expect(ARCADE_CARTRIDGES.map((game) => game.title)).toEqual([
+      'Snake',
+      'Memory Match',
+      'Tic Tac Toe',
+      'Minesweeper',
+    ]);
     expect(ARCADE_CARTRIDGES.every((game) => game.description.length < 70)).toBe(true);
   });
 });

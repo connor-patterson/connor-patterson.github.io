@@ -1,6 +1,6 @@
 # PatterOS
 
-Connor Patterson's personal site, built as a small computer that is useful as well as playful. PatterOS opens with a concise introduction, remembers how you arrange it, reacts to the pointer, and keeps two familiar games in the arcade.
+Connor Patterson's personal site, built as a small computer that is useful as well as playful. PatterOS opens with a concise introduction, remembers how you arrange it, reacts to the pointer, and keeps four familiar games in the arcade.
 
 Live site: [connor-patterson.github.io](https://connor-patterson.github.io/)
 
@@ -9,7 +9,8 @@ Live site: [connor-patterson.github.io](https://connor-patterson.github.io/)
 - Eight useful desktop shortcuts in a compact three column cluster.
 - A quieter first view with production results and project evidence available when a visitor wants the detail.
 - Conventional minimize, maximize, and close controls, with sharing, size presets, and repositioning tucked into a window options menu.
-- Snake and Memory Match with keyboard or touch controls and local best scores.
+- Snake, Memory Match, Tic Tac Toe, and Minesweeper.
+- An interactive full stack system explorer and a live, read-only GitHub view.
 - An interactive desktop field with pointer light, grid reveal, and click or tap signals.
 - Direct case study pages and a printable evidence brief for interview loops.
 - Day, night, high contrast, reduced motion, and responsive layouts from phone to wide desktop.

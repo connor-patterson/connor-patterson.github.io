@@ -28,7 +28,9 @@ The following contracts remain fixed unless a future architecture decision expli
 | Shared navigation    | Implemented | Desktop, launcher, taskbar, routes, and content links share the typed application registry          |
 | Window clarity       | Implemented | Familiar minimize, maximize, and close controls with advanced actions inside a compact options menu |
 | Desktop interaction  | Implemented | Pointer light, local grid reveal, and bounded click or tap signals with reduced motion support      |
-| Familiar arcade      | Implemented | Snake and Memory Match with keyboard or touch input and locally stored best results                 |
+| Familiar arcade      | Implemented | Snake, Memory Match, Tic Tac Toe, and Minesweeper                                                   |
+| System explorer      | Implemented | Interactive client, service, and delivery decisions grounded in the Work Log                        |
+| GitHub pulse         | Implemented | Read-only public repository data with a clear offline fallback                                      |
 | Evidence and access  | Retained    | Optional case study depth, print brief, responsive layouts, high contrast, and Comfortable Reading  |
 | Optional services    | Gated       | No network service because none currently justifies its privacy, reliability, or operating cost     |
 | Release verification | Per release | `npm run check`, visual review, and a cold cache check of the published Pages site                  |
@@ -42,7 +44,7 @@ These are release gates, not future polish:
 - Exercise open, close, minimize, restore, maximize, drag, resize, options, route sync, and compact behavior.
 - Confirm all eight purposeful shortcuts appear on the desktop and match the launcher.
 - Validate every color mode, reduced motion, 200% zoom, keyboard only use, and common phone, tablet, and desktop viewports.
-- Test Snake and Memory Match through start, play, restart, resize, repeated open and close, and visibility changes.
+- Test all four games through play and restart; keep the real-time Snake pause and visibility checks.
 - Test pointer and tap signals, control exclusion, bounded cleanup, reduced motion, and forced colors.
 - Confirm the résumé downloads, social card renders at 1200 by 630, and metadata uses the production URL.
 - Run the local release gate and a cold cache smoke test against the deployed Pages URL.
@@ -93,7 +95,7 @@ Goal: offer a quick break that is immediately understandable and still shows imp
 
 Current decisions:
 
-- [x] Replace the previous simulation games with Snake and Memory Match.
+- [x] Replace the previous simulation games with four familiar, one-player games.
 - [x] Support keyboard and touch input with visible instructions.
 - [x] Keep rules in pure TypeScript modules and results in local storage.
 - [x] Keep the arcade outside the initial portfolio bundle.

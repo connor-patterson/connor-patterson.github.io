@@ -1,0 +1,62 @@
+<section class="mines" aria-labelledby="mines-title">
+  <header>
+    <div>
+      <p class="eyebrow">ARCADE 04</p>
+      <h3 id="mines-title">Minesweeper</h3>
+      <p>Your first pick is always safe.</p>
+    </div>
+    <div class="mines__counter">
+      <small>MINES</small><strong>{{ minesLeft() }}</strong>
+    </div>
+  </header>
+
+  <div class="mines__toolbar">
+    <span aria-live="polite">
+      {{
+        status() === 'won'
+          ? 'Board cleared!'
+          : status() === 'lost'
+            ? 'Mine found.'
+            : 'Clear the board.'
+      }}
+    </span>
+    <button
+      class="retro-button"
+      type="button"
+      [attr.aria-pressed]="flagMode()"
+      (click)="flagMode.set(!flagMode())"
+    >
+      {{ flagMode() ? 'Flag mode on' : 'Flag mode' }}
+    </button>
+  </div>
+
+  <div class="mines__board" role="group" aria-label="Minesweeper board">
+    @for (cell of cells(); track $index) {
+      <button
+        type="button"
+        [class.mines__cell--revealed]="cell.revealed"
+        [class.mines__cell--mine]="cell.revealed && cell.mine"
+        [class.mines__cell--flagged]="cell.flagged"
+        [disabled]="cell.revealed || status() !== 'playing'"
+        [attr.aria-label]="cellLabel(cell, $index)"
+        (click)="choose($index)"
+        (contextmenu)="$event.preventDefault(); toggleFlag($index)"
+      >
+        <span aria-hidden="true">
+          {{
+            cell.flagged
+              ? '⚑'
+              : cell.revealed && cell.mine
+                ? '●'
+                : cell.revealed && cell.nearby
+                  ? cell.nearby
+                  : ''
+          }}
+        </span>
+      </button>
+    }
+  </div>
+  <button class="retro-button retro-button--primary" type="button" (click)="restart()">
+    New board
+  </button>
+</section>

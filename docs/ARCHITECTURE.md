@@ -28,7 +28,9 @@ flowchart LR
     Boot["Short skippable boot"] --> Shell
     Shell --> Start["Eager Start window"]
     Shell --> Apps["Evidence and secondary apps"]
-    Shell --> Arcade["Lazy Snake and Memory Match"]
+    Shell --> Arcade["Lazy four-game arcade"]
+    Shell --> Systems["Lazy system explorer"]
+    Shell --> GitHub["Lazy public GitHub view"]
     Shell --> Signals["Interactive desktop field"]
     Static["Direct case pages and print brief"] --> Pages["GitHub Pages artifact"]
 ```
@@ -78,7 +80,7 @@ Constraints:
 - Compact layouts disable free dragging and show the active window; the taskbar switches between
   other open windows. Comfortable Reading presents every open window in document order.
 - Essential content must remain usable if drag interaction is unavailable.
-- Position and size are stored under the versioned `patteros.window-layout.v2` key. Open, minimized, maximized, focus, and depth state stay transient.
+- Position and size are stored under the versioned `patteros.window-layout.v3` key. Open, minimized, maximized, focus, and depth state stay transient.
 - Viewport fitting is derived for display and never overwrites the saved preferred geometry.
 
 ### Preferences
@@ -105,9 +107,9 @@ Work Log includes accessible, sanitized architecture flows and direct links to s
 
 ### Arcade boundary
 
-The entire Arcade application is a dynamic import and stays outside the initial portfolio bundle. Snake and Memory Match use native DOM controls and pure TypeScript rule modules, which keep game state deterministic, accessible, and inexpensive to test.
+The entire Arcade application is a dynamic import and stays outside the initial portfolio bundle. Snake, Memory Match, Tic Tac Toe, and Minesweeper use native DOM controls and deterministic TypeScript state, which keeps the games accessible and inexpensive to run.
 
-Snake supports arrow keys and visible direction buttons. Memory Match uses standard card buttons. Both work with touch, keep best results only in local storage, and provide pause or restart behavior where the game state needs it. Visibility changes pause active play, teardown clears timers, and neither game starts audio or opens a network connection.
+Snake supports WASD and visible direction buttons. Memory Match, Tic Tac Toe, and Minesweeper use standard buttons. The games work with touch and provide restart behavior where the game state needs it. Visibility changes pause active play, teardown clears timers, and no game starts audio.
 
 ### Direct pages and print output
 

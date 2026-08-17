@@ -1,0 +1,48 @@
+<section class="github-panel" aria-labelledby="github-heading">
+  <header class="github-panel__header">
+    <div>
+      <p class="eyebrow">Live from GitHub</p>
+      <h2 id="github-heading">Public code, without leaving the desktop.</h2>
+      <p>This window asks GitHub for my latest public repositories when you open it.</p>
+    </div>
+    <a href="https://github.com/connor-patterson" target="_blank" rel="noopener noreferrer">
+      Open profile <span aria-hidden="true">↗</span>
+    </a>
+  </header>
+
+  @switch (state()) {
+    @case ('loading') {
+      <div class="github-panel__state" role="status"><span></span> Calling GitHub…</div>
+    }
+    @case ('unavailable') {
+      <div class="github-panel__state github-panel__state--error" role="status">
+        <strong>GitHub did not answer this time.</strong>
+        <p>The rest of PatterOS works offline. You can retry or open the profile directly.</p>
+        <button class="retro-button" type="button" (click)="retry()">Try again</button>
+      </div>
+    }
+    @case ('ready') {
+      <div class="github-panel__grid">
+        @for (repository of repositories(); track repository.name) {
+          <article>
+            <div class="github-panel__repo-heading">
+              <span aria-hidden="true">&lt;/&gt;</span>
+              <h3>{{ repository.name }}</h3>
+            </div>
+            <p>{{ repository.description || 'A public project from my GitHub workspace.' }}</p>
+            <footer>
+              <span>{{ repository.language || 'Mixed stack' }}</span>
+              @if (repository.stargazers_count > 0) {
+                <span>★ {{ repository.stargazers_count }}</span>
+              }
+              <a [href]="repository.html_url" target="_blank" rel="noopener noreferrer">
+                View repo <span aria-hidden="true">↗</span>
+              </a>
+            </footer>
+          </article>
+        }
+      </div>
+      <p class="github-panel__note">Live public data from GitHub. No sign-in or tracking added.</p>
+    }
+  }
+</section>

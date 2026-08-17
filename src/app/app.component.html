@@ -65,7 +65,7 @@
 
     <p class="system-bar__mode">
       <span class="status-dot" aria-hidden="true"></span>
-      Good software. Curious side quests.
+      Open to lead full stack opportunities.
     </p>
 
     <div class="system-bar__meta" aria-label="Portfolio status">
@@ -92,7 +92,7 @@
     id="workspace"
     tabindex="-1"
     (pointermove)="handleDesktopPointerMove($event)"
-    (pointerleave)="handleDesktopPointerLeave($event)"
+    (pointerleave)="handleDesktopPointerLeave()"
     (pointerdown)="handleDesktopPointerDown($event)"
   >
     <div class="desktop-stage__signal-field" aria-hidden="true" data-testid="signal-field">
@@ -166,6 +166,20 @@
                       <small>One moment while the fun bits click into place.</small>
                     </div>
                   </div>
+                }
+              }
+              @case ('systems') {
+                @if (lazyComponents().systems; as component) {
+                  <ng-container *ngComponentOutlet="component" />
+                } @else {
+                  <div class="feature-loader" role="status">Mapping the system…</div>
+                }
+              }
+              @case ('github') {
+                @if (lazyComponents().github; as component) {
+                  <ng-container *ngComponentOutlet="component" />
+                } @else {
+                  <div class="feature-loader" role="status">Checking GitHub…</div>
                 }
               }
               @case ('profile') {

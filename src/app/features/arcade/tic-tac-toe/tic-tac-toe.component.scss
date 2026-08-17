@@ -1,0 +1,88 @@
+:host {
+  display: block;
+}
+.ttt {
+  display: grid;
+  max-width: 40rem;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 1.8rem);
+}
+.ttt header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.ttt h3 {
+  margin: 0;
+  font-family: var(--font-interface);
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1;
+}
+.ttt header p:not(.eyebrow) {
+  margin: 0.5rem 0 0;
+  color: var(--ink-muted);
+}
+.ttt__wins {
+  display: grid;
+  min-width: 5rem;
+  align-content: center;
+  justify-items: center;
+  padding: 0.55rem;
+  background: var(--surface-sunken);
+  border: 2px solid var(--border-mid);
+  font-family: var(--font-mono);
+}
+.ttt__wins small {
+  color: var(--ink-muted);
+  font-size: 0.6rem;
+}
+.ttt__wins strong {
+  color: var(--signal-strong);
+  font-size: 1.5rem;
+}
+.ttt__status {
+  margin: 0;
+  font-weight: 800;
+}
+.ttt__board {
+  display: grid;
+  width: min(100%, 30rem);
+  aspect-ratio: 1;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  justify-self: center;
+}
+.ttt__board button {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  color: #102820;
+  background: #f5edcf;
+  border: 3px solid;
+  border-color: #fffdf4 #685f48 #685f48 #fffdf4;
+  cursor: pointer;
+}
+.ttt__board button:not(:disabled):hover {
+  background: #d7f6e3;
+}
+.ttt__board button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.ttt__board span {
+  font-family: var(--font-interface);
+  font-size: clamp(3rem, 11vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+}
+.ttt > .retro-button {
+  justify-self: center;
+}
+@media (forced-colors: active) {
+  .ttt__board button {
+    color: CanvasText;
+    background: Canvas;
+    border-color: CanvasText;
+  }
+}

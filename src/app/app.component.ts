@@ -27,7 +27,7 @@ import { LauncherMenuComponent } from './ui/launcher-menu/launcher-menu.componen
 import { TaskbarComponent } from './ui/taskbar/taskbar.component';
 import { WindowFrameComponent } from './ui/window-frame/window-frame.component';
 
-type LazyAppId = 'arcade' | 'settings';
+type LazyAppId = 'arcade' | 'github' | 'settings' | 'systems';
 
 interface DesktopRipple {
   id: number;
@@ -125,7 +125,7 @@ export class AppComponent {
     });
 
     effect(() => {
-      for (const id of ['arcade', 'settings'] as const) {
+      for (const id of ['arcade', 'github', 'settings', 'systems'] as const) {
         if (this.windows.stateFor(id).isOpen) this.ensureLazyApp(id);
       }
     });
@@ -175,13 +175,10 @@ export class AppComponent {
     });
   }
 
-  handleDesktopPointerLeave(event: PointerEvent): void {
-    const stage = event.currentTarget as HTMLElement;
+  handleDesktopPointerLeave(): void {
     const view = this.document.defaultView;
     if (view && this.backdropFrame) view.cancelAnimationFrame(this.backdropFrame);
     this.backdropFrame = 0;
-    stage.style.removeProperty('--signal-x');
-    stage.style.removeProperty('--signal-y');
   }
 
   handleDesktopPointerDown(event: PointerEvent): void {
@@ -428,10 +425,24 @@ export class AppComponent {
           ),
         );
         break;
+      case 'github':
+        void this.loadLazyApp(id, () =>
+          import('./features/github/github-panel.component').then(
+            ({ GithubPanelComponent }) => GithubPanelComponent,
+          ),
+        );
+        break;
       case 'settings':
         void this.loadLazyApp(id, () =>
           import('./features/settings/settings-panel.component').then(
             ({ SettingsPanelComponent }) => SettingsPanelComponent,
+          ),
+        );
+        break;
+      case 'systems':
+        void this.loadLazyApp(id, () =>
+          import('./features/systems/systems-panel.component').then(
+            ({ SystemsPanelComponent }) => SystemsPanelComponent,
           ),
         );
     }

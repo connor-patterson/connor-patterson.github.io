@@ -9,7 +9,7 @@ const MIN_WINDOW_WIDTH = 360;
 const MIN_WINDOW_HEIGHT = 280;
 const WINDOW_EDGE_GAP = 12;
 const DESKTOP_CHROME_HEIGHT = 124;
-export const WINDOW_LAYOUT_STORAGE_KEY = 'patteros.window-layout.v2';
+export const WINDOW_LAYOUT_STORAGE_KEY = 'patteros.window-layout.v3';
 
 export interface StoredWindowLayout {
   readonly position: Point;
@@ -17,7 +17,7 @@ export interface StoredWindowLayout {
 }
 
 interface StoredWorkspaceLayout {
-  readonly version: 2;
+  readonly version: 3;
   readonly windows: Partial<Record<AppId, StoredWindowLayout>>;
 }
 
@@ -217,7 +217,7 @@ function readStoredLayout(): Partial<Record<AppId, StoredWindowLayout>> {
     if (!stored) return {};
 
     const parsed = JSON.parse(stored) as Partial<StoredWorkspaceLayout>;
-    if (parsed.version !== 2 || !parsed.windows) return {};
+    if (parsed.version !== 3 || !parsed.windows) return {};
 
     return Object.fromEntries(
       DESKTOP_APPS.flatMap((app) => {
@@ -234,7 +234,7 @@ function readStoredLayout(): Partial<Record<AppId, StoredWindowLayout>> {
 
 function storeLayout(state: WorkspaceState): void {
   const layout: StoredWorkspaceLayout = {
-    version: 2,
+    version: 3,
     windows: Object.fromEntries(
       DESKTOP_APPS.map((app) => [
         app.id,

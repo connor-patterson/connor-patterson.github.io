@@ -35,7 +35,7 @@
           @switch (state().status) {
             @case ('ready') {
               <strong>Ready?</strong>
-              <span>Arrow keys, WASD, or the buttons.</span>
+              <span>Use WASD or the direction pad.</span>
               <button class="retro-button retro-button--primary" type="button" (click)="start()">
                 Start
               </button>
@@ -66,27 +66,29 @@
       }
     </div>
 
-    <div class="snake-controls" aria-label="Snake controls">
-      <button type="button" aria-label="Move up" (click)="turn('up')">↑</button>
-      <button type="button" aria-label="Move left" (click)="turn('left')">←</button>
-      <button type="button" aria-label="Move down" (click)="turn('down')">↓</button>
-      <button type="button" aria-label="Move right" (click)="turn('right')">→</button>
-    </div>
-  </div>
+    <div class="snake-side">
+      <div class="snake-controls" aria-label="Snake controls">
+        <button type="button" aria-label="Move up" (click)="turn('up')">↑</button>
+        <button type="button" aria-label="Move left" (click)="turn('left')">←</button>
+        <button type="button" aria-label="Move down" (click)="turn('down')">↓</button>
+        <button type="button" aria-label="Move right" (click)="turn('right')">→</button>
+      </div>
 
-  <div class="game-actions">
-    <button
-      class="retro-button"
-      type="button"
-      [disabled]="
-        state().status === 'ready' || state().status === 'game-over' || state().status === 'won'
-      "
-      (click)="pause()"
-    >
-      {{ state().status === 'paused' ? 'Resume' : 'Pause' }}
-    </button>
-    <button class="retro-button" type="button" (click)="restart()">Restart</button>
-    <span>Keyboard: arrows or WASD</span>
+      <div class="game-actions">
+        <button
+          class="retro-button"
+          type="button"
+          [disabled]="
+            state().status === 'ready' || state().status === 'game-over' || state().status === 'won'
+          "
+          (click)="pause()"
+        >
+          {{ state().status === 'paused' ? 'Resume' : 'Pause' }}
+        </button>
+        <button class="retro-button" type="button" (click)="restart()">Restart</button>
+        <span>WASD</span>
+      </div>
+    </div>
   </div>
 
   <output class="screen-reader-only" aria-live="polite">{{ state().announcement }}</output>

@@ -4,13 +4,15 @@ import type { ElementRef } from '@angular/core';
 import { ARCADE_CARTRIDGES } from '../../core/app.registry';
 import type { ArcadeCartridge } from '../../core/portfolio.models';
 import { MemoryMatchComponent } from './memory-match/memory-match.component';
+import { MinesweeperComponent } from './minesweeper/minesweeper.component';
 import { SnakeComponent } from './snake/snake.component';
+import { TicTacToeComponent } from './tic-tac-toe/tic-tac-toe.component';
 
 type ArcadeView = 'shelf' | ArcadeCartridge['id'];
 
 @Component({
   selector: 'app-arcade-panel',
-  imports: [MemoryMatchComponent, SnakeComponent],
+  imports: [MemoryMatchComponent, MinesweeperComponent, SnakeComponent, TicTacToeComponent],
   templateUrl: './arcade-panel.component.html',
   styleUrl: './arcade-panel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

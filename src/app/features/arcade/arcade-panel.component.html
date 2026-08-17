@@ -5,11 +5,11 @@
       <div>
         <p class="eyebrow">TAKE A QUICK BREAK</p>
         <h2 #shelfHeading tabindex="-1">PatterOS Arcade</h2>
-        <p>Two familiar games. Pick one and play.</p>
+        <p>Four familiar games. No tutorial required.</p>
       </div>
       <div class="arcade__marquee" aria-hidden="true">
-        <span>PRESS</span>
-        <strong>PLAY</strong>
+        <span>PICK A</span>
+        <strong>GAME</strong>
       </div>
     </header>
 
@@ -18,15 +18,24 @@
         <button
           class="game-card"
           type="button"
-          [class.game-card--green]="game.color === 'green'"
+          [attr.data-color]="game.color"
           [attr.aria-label]="'Play ' + game.title + '. ' + game.description"
           (click)="launch(game)"
         >
           <span class="game-card__picture" [attr.data-game]="game.id" aria-hidden="true">
             @if (game.id === 'snake') {
-              <i></i><i></i><i></i><b></b>
-            } @else {
+              <span class="preview-snake"><i></i><i></i><i></i><i></i><b></b></span>
+            } @else if (game.id === 'memory-match') {
               <i>★</i><i>◆</i><i>★</i><i>◆</i>
+            } @else if (game.id === 'tic-tac-toe') {
+              <span class="preview-ttt"
+                ><i>X</i><i>O</i><i>X</i><i></i><i>X</i><i>O</i><i>O</i><i></i><i>X</i></span
+              >
+            } @else {
+              <span class="preview-mines"
+                ><i>1</i><i></i><i>2</i><i>⚑</i><i>1</i><i></i><i></i><i>1</i><i></i><i>1</i><i>1</i
+                ><i></i
+              ></span>
             }
           </span>
           <span class="game-card__copy">
@@ -37,17 +46,12 @@
         </button>
       }
     </div>
-
-    <footer class="arcade__footer">
-      <span class="status-dot" aria-hidden="true"></span>
-      <p>Keyboard and touch controls. Scores stay in this browser.</p>
-    </footer>
   } @else {
     <header class="arcade__gamebar">
       <button class="retro-button" type="button" #backButton (click)="returnToShelf()">
         <span aria-hidden="true">←</span> All games
       </button>
-      <span>KEYBOARD + TOUCH</span>
+      <span>PAUSE ANYTIME</span>
     </header>
 
     <div class="arcade__game">
@@ -57,6 +61,12 @@
         }
         @case ('memory-match') {
           <app-memory-match />
+        }
+        @case ('tic-tac-toe') {
+          <app-tic-tac-toe />
+        }
+        @case ('minesweeper') {
+          <app-minesweeper />
         }
       }
     </div>
