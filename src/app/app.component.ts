@@ -62,6 +62,9 @@ const TOUR_STEPS: readonly TourStep[] = [
   { id: 'contact', label: 'Contact', prompt: 'Finish with the simplest ways to reach me.' },
 ];
 
+const ACTIVE_TAB_TITLE = 'PatterOS';
+const HIDDEN_TAB_TITLE = 'Come back :[';
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -182,6 +185,11 @@ export class AppComponent {
   @HostListener('window:resize')
   handleViewportResize(): void {
     this.scheduleWorkspaceConstraint();
+  }
+
+  @HostListener('document:visibilitychange')
+  handleDocumentVisibility(): void {
+    this.document.title = this.document.hidden ? HIDDEN_TAB_TITLE : ACTIVE_TAB_TITLE;
   }
 
   handleDesktopPointerMove(event: PointerEvent): void {

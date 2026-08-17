@@ -1,3 +1,16 @@
+<svg class="lens-filter-definitions" aria-hidden="true" focusable="false">
+  <filter id="desktop-fisheye" x="-20%" y="-20%" width="140%" height="140%">
+    <feImage href="assets/fisheye-map.svg" preserveAspectRatio="none" result="map" />
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="map"
+      xChannelSelector="R"
+      yChannelSelector="G"
+      [attr.scale]="preferences.crtIntensity() * 0.05"
+    />
+  </filter>
+</svg>
+
 @if (booting()) {
   <section
     class="boot-screen"
@@ -100,6 +113,7 @@
         ></i>
       }
     </div>
+    <div class="desktop-stage__fisheye" aria-hidden="true"></div>
     <div class="desktop-stage__ambient" aria-hidden="true">
       <span>BUILD 2026.08</span>
       <strong>OPEN A WINDOW. POKE AROUND.</strong>
