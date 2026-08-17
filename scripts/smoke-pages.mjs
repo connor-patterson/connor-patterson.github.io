@@ -770,6 +770,12 @@ try {
   await page.getByRole('button', { name: /^Play Tic Tac Toe\./ }).click();
   const ticTacToe = page.locator('.ttt');
   await ticTacToe.getByRole('button', { name: 'Choose square 1' }).click();
+  await page.waitForFunction(
+    () =>
+      [...document.querySelectorAll('.ttt__board button')].filter((button) =>
+        button.textContent?.trim(),
+      ).length >= 2,
+  );
   assert(
     (
       await ticTacToe
