@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">PatterOS cursor orbit</title>
+  <rect width="64" height="64" rx="8" fill="#0d2532"/>
+  <circle cx="35" cy="29" r="18" fill="none" stroke="#245a90" stroke-width="5"/>
+  <path d="M13 9v37l10-10 8 17 8-4-8-16h15z" fill="#67f3c2" stroke="#f5f0e6" stroke-width="2" stroke-linejoin="miter"/>
+  <path d="M45 8h6v6h-6zm7 9h4v4h-4z" fill="#f07a3f"/>
+</svg>

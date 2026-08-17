@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="desktop" x1="84" y1="36" x2="1112" y2="606" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#183852"/>
+      <stop offset=".55" stop-color="#0d2538"/>
+      <stop offset="1" stop-color="#071723"/>
+    </linearGradient>
+    <linearGradient id="mintGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#79f2c4"/>
+      <stop offset="1" stop-color="#48cfa2"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M30 0H0v30" fill="none" stroke="#c8e5f2" stroke-opacity=".055"/>
+      <circle cx="1" cy="1" r="1" fill="#c8e5f2" fill-opacity=".12"/>
+    </pattern>
+    <filter id="softShadow" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="10" dy="12" stdDeviation="0" flood-color="#020b11" flood-opacity=".42"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="26" fill="url(#desktop)"/>
+  <rect width="1200" height="630" rx="26" fill="url(#grid)"/>
+  <circle cx="1048" cy="100" r="178" fill="#6f7df4" fill-opacity=".12"/>
+  <circle cx="1090" cy="566" r="198" fill="#72efbc" fill-opacity=".1"/>
+
+  <g transform="translate(58 44)">
+    <rect width="58" height="58" rx="15" fill="url(#mintGlow)" stroke="#071723" stroke-width="4"/>
+    <path d="M18 44V14h14c9 0 14 4 14 12s-5 12-14 12h-5v6h-9Zm9-14h5c3 0 5-1 5-4s-2-4-5-4h-5v8Z" fill="#0b2233"/>
+    <path d="m46 9 8 8-8 8Z" fill="#ffb376" stroke="#071723" stroke-width="3"/>
+  </g>
+  <text x="132" y="69" fill="#f4f8f6" font-family="Space Grotesk, Arial, sans-serif" font-size="31" font-weight="700" letter-spacing=".2">PatterOS</text>
+  <text x="132" y="97" fill="#a9c1cf" font-family="Azeret Mono, Consolas, monospace" font-size="16" font-weight="600" letter-spacing="1">CONNOR PATTERSON</text>
+
+  <g transform="translate(64 162)">
+    <text fill="#79f2c4" font-family="Azeret Mono, Consolas, monospace" font-size="17" font-weight="700" letter-spacing="2">FULL STACK ENGINEER  •  GAME BUILDER</text>
+    <text y="78" fill="#f8fbfa" font-family="Space Grotesk, Arial, sans-serif" font-size="61" font-weight="700" letter-spacing="-2.2">I fix slow software.</text>
+    <text y="142" fill="#f8fbfa" font-family="Space Grotesk, Arial, sans-serif" font-size="61" font-weight="700" letter-spacing="-2.2">Then I build games.</text>
+    <text y="195" fill="#b8cbd5" font-family="Space Grotesk, Arial, sans-serif" font-size="24">Production stories, side projects, and a tiny arcade.</text>
+  </g>
+
+  <g transform="translate(66 430)">
+    <g>
+      <rect width="196" height="112" rx="18" fill="#f8f4e9" stroke="#071723" stroke-width="4"/>
+      <path d="M0 20Q0 0 20 0h156q20 0 20 20v18H0Z" fill="#79f2c4"/>
+      <circle cx="20" cy="19" r="6" fill="#0b2233"/>
+      <text x="32" y="25" fill="#0b2233" font-family="Azeret Mono, Consolas, monospace" font-size="13" font-weight="700">SCALE</text>
+      <text x="18" y="74" fill="#11263a" font-family="Space Grotesk, Arial, sans-serif" font-size="31" font-weight="700">600K+</text>
+      <text x="18" y="98" fill="#536171" font-family="Space Grotesk, Arial, sans-serif" font-size="15">monthly transactions</text>
+    </g>
+    <g transform="translate(214)">
+      <rect width="218" height="112" rx="18" fill="#f8f4e9" stroke="#071723" stroke-width="4"/>
+      <path d="M0 20Q0 0 20 0h178q20 0 20 20v18H0Z" fill="#ffb376"/>
+      <path d="m17 13 7 7-7 7M29 27h10" fill="none" stroke="#0b2233" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="47" y="25" fill="#0b2233" font-family="Azeret Mono, Consolas, monospace" font-size="13" font-weight="700">SPEED</text>
+      <text x="18" y="74" fill="#11263a" font-family="Space Grotesk, Arial, sans-serif" font-size="31" font-weight="700">50.51%</text>
+      <text x="18" y="98" fill="#536171" font-family="Space Grotesk, Arial, sans-serif" font-size="15">less tracked latency</text>
+    </g>
+  </g>
+
+  <g transform="translate(744 150)" filter="url(#softShadow)">
+    <rect width="392" height="346" rx="22" fill="#f8f4e9" stroke="#06131e" stroke-width="5"/>
+    <path d="M0 23Q0 0 23 0h346q23 0 23 23v47H0Z" fill="#6f7df4"/>
+    <circle cx="28" cy="35" r="8" fill="#f8f4e9"/>
+    <text x="50" y="43" fill="#fff" font-family="Azeret Mono, Consolas, monospace" font-size="17" font-weight="700">WHAT'S OPEN</text>
+
+    <g transform="translate(28 98)">
+      <rect width="96" height="96" rx="22" fill="#d9fff0" stroke="#102538" stroke-width="4"/>
+      <path d="M24 70V30h20l14 12h14v28H24Z" fill="#79f2c4" stroke="#102538" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M34 55h28" stroke="#102538" stroke-width="4" stroke-linecap="round"/>
+      <text x="48" y="120" fill="#11263a" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">WORK</text>
+    </g>
+    <g transform="translate(148 98)">
+      <rect width="96" height="96" rx="22" fill="#ffead9" stroke="#102538" stroke-width="4"/>
+      <path d="m26 58 18-28 12 18 10-9 8 19Z" fill="#ffb376" stroke="#102538" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="67" cy="31" r="7" fill="#79f2c4" stroke="#102538" stroke-width="3"/>
+      <text x="48" y="120" fill="#11263a" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">BUILDS</text>
+    </g>
+    <g transform="translate(268 98)">
+      <rect width="96" height="96" rx="22" fill="#e9e6ff" stroke="#102538" stroke-width="4"/>
+      <path d="M29 27h38v42H29Z" fill="#fff" stroke="#102538" stroke-width="4"/>
+      <path d="M37 40h22M37 49h22M37 58h14" stroke="#6f7df4" stroke-width="4" stroke-linecap="round"/>
+      <text x="48" y="120" fill="#11263a" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">RESUME</text>
+    </g>
+
+    <g transform="translate(28 253)">
+      <rect width="336" height="62" rx="16" fill="#102538"/>
+      <path d="M24 21h20l10 10-10 10H24Z" fill="#79f2c4"/>
+      <circle cx="40" cy="31" r="5" fill="#102538"/>
+      <text x="70" y="38" fill="#f7faf8" font-family="Azeret Mono, Consolas, monospace" font-size="16" font-weight="700">ARCADE READY</text>
+      <circle cx="298" cy="31" r="8" fill="#79f2c4"/>
+    </g>
+  </g>
+</svg>

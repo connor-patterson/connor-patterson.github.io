@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Cutting a Critical Path in Half | Connor Patterson</title>
+    <meta
+      name="description"
+      content="How Connor Patterson profiled a high volume quoting flow, removed repeat work, and reduced tracked latency from 58.75 seconds to 29.08 seconds."
+    />
+    <link rel="canonical" href="https://connor-patterson.github.io/case-studies/latency/" />
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+    <link rel="stylesheet" href="../case-study.css" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Cutting a Critical Path in Half" />
+    <meta
+      property="og:description"
+      content="A compact look at the profiling, implementation, and production checks behind a 50.51% latency reduction."
+    />
+    <meta property="og:url" content="https://connor-patterson.github.io/case-studies/latency/" />
+    <meta property="og:image" content="https://connor-patterson.github.io/assets/social-card.png" />
+    <meta property="og:image:alt" content="PatterOS portfolio preview" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cutting a Critical Path in Half" />
+    <meta
+      name="twitter:description"
+      content="The profiling, implementation, and production checks behind a 50.51% latency reduction."
+    />
+    <meta
+      name="twitter:image"
+      content="https://connor-patterson.github.io/assets/social-card.png"
+    />
+    <meta name="twitter:image:alt" content="PatterOS portfolio preview" />
+  </head>
+  <body class="case--latency">
+    <a class="skip-link" href="#case-study">Skip to the case study</a>
+    <header class="site-bar">
+      <a class="brand" href="../../#/start">
+        <span class="brand__mark" aria-hidden="true">P</span>
+        <span>PatterOS</span>
+      </a>
+      <nav class="site-bar__links" aria-label="Case study links">
+        <a href="../secure-delivery/">Secure delivery</a>
+        <a href="../../assets/ConnorPattersonResume2026.pdf">Résumé</a>
+      </nav>
+    </header>
+
+    <main id="case-study">
+      <article>
+        <header class="hero">
+          <p class="eyebrow">Performance case study</p>
+          <h1>A 58 second quote flow was too long.</h1>
+          <p class="lede">
+            A high volume insurance quoting flow had accumulated repeat work in the browser and API
+            path. I profiled the actual journey, removed the waste in measured steps, and kept the
+            release grounded in production telemetry.
+          </p>
+          <div class="metric-grid" aria-label="Measured results">
+            <div class="metric">
+              <strong>58.75s to 29.08s</strong>
+              <span>Tracked sales flow, a 50.51% reduction</span>
+            </div>
+            <div class="metric">
+              <strong>66.43%</strong>
+              <span>Lower Vehicle Detail latency, measured week over week</span>
+            </div>
+            <div class="metric">
+              <strong>24.3%</strong>
+              <span>Lower Review Quote latency after supporting changes shipped</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="section" aria-labelledby="path-heading">
+          <p class="eyebrow">The path through it</p>
+          <h2 id="path-heading">I started with the real request path.</h2>
+          <ol class="chain">
+            <li>
+              <h3>Find the expensive steps</h3>
+              <p>Used real user monitoring and browser plus API profiling on the tracked flow.</p>
+            </li>
+            <li>
+              <h3>Remove repeat work</h3>
+              <p>
+                Hoisted converter calls and avoided updates that produced no meaningful state
+                change.
+              </p>
+            </li>
+            <li>
+              <h3>Cache where it was safe</h3>
+              <p>Applied endpoint and Redis caching while preserving freshness requirements.</p>
+            </li>
+            <li>
+              <h3>Collapse duplicate requests</h3>
+              <p>Deduplicated work already in flight instead of asking the same question twice.</p>
+            </li>
+            <li>
+              <h3>Ship with proof</h3>
+              <p>
+                Used automated checks, code review, release readiness, and production telemetry to
+                confirm the result.
+              </p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="section" aria-labelledby="ownership-heading">
+          <p class="eyebrow">My part</p>
+          <h2 id="ownership-heading">I stayed with it through production.</h2>
+          <p>
+            I drove the profiling, implementation, coordination across codebases, and production
+            readiness work. The latest observed total reached 26.09 seconds after the initial
+            measured improvement.
+          </p>
+          <ul class="stack" aria-label="Technology used">
+            <li>Angular</li>
+            <li>Java and Spring</li>
+            <li>Redis</li>
+            <li>Dynatrace RUM</li>
+            <li>API profiling</li>
+          </ul>
+        </section>
+
+        <aside class="note" aria-labelledby="privacy-heading">
+          <h2 id="privacy-heading">What stays private</h2>
+          <p>
+            This page uses public résumé level figures. Customer data, internal diagrams, endpoint
+            names, and proprietary implementation details are intentionally left out.
+          </p>
+        </aside>
+
+        <div class="actions">
+          <a class="button" href="../../#/impact">Open this in PatterOS</a>
+          <a class="button button--quiet" href="../../assets/ConnorPattersonResume2026.pdf"
+            >Read the résumé</a
+          >
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <strong>Connor Patterson</strong> · Lead Full Stack Software Engineer ·
+      <a href="mailto:connor.patter@aol.com">connor.patter@aol.com</a>
+    </footer>
+  </body>
+</html>

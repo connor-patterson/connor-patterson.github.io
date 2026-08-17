@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Secure Delivery Across Four Codebases | Connor Patterson</title>
+    <meta
+      name="description"
+      content="How Connor Patterson carried required identifiers through four codebases while keeping sensitive values out of the displayed browser state."
+    />
+    <link rel="canonical" href="https://connor-patterson.github.io/case-studies/secure-delivery/" />
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+    <link rel="stylesheet" href="../case-study.css" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Secure Delivery Across Four Codebases" />
+    <meta
+      property="og:description"
+      content="A compact look at owning one secure change from interface to downstream integration."
+    />
+    <meta
+      property="og:url"
+      content="https://connor-patterson.github.io/case-studies/secure-delivery/"
+    />
+    <meta property="og:image" content="https://connor-patterson.github.io/assets/social-card.png" />
+    <meta property="og:image:alt" content="PatterOS portfolio preview" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Secure Delivery Across Four Codebases" />
+    <meta
+      name="twitter:description"
+      content="Owning one secure change from the interface through downstream integration."
+    />
+    <meta
+      name="twitter:image"
+      content="https://connor-patterson.github.io/assets/social-card.png"
+    />
+    <meta name="twitter:image:alt" content="PatterOS portfolio preview" />
+  </head>
+  <body class="case--secure-delivery">
+    <a class="skip-link" href="#case-study">Skip to the case study</a>
+    <header class="site-bar">
+      <a class="brand" href="../../#/start">
+        <span class="brand__mark" aria-hidden="true">P</span>
+        <span>PatterOS</span>
+      </a>
+      <nav class="site-bar__links" aria-label="Case study links">
+        <a href="../latency/">Performance work</a>
+        <a href="../../assets/ConnorPattersonResume2026.pdf">Résumé</a>
+      </nav>
+    </header>
+
+    <main id="case-study">
+      <article>
+        <header class="hero">
+          <p class="eyebrow">Security case study</p>
+          <h1>One change had to cross four codebases.</h1>
+          <p class="lede">
+            A workflow needed required identifiers to reach downstream systems without putting
+            sensitive values into displayed browser state. I defined the full path and owned the
+            checks at each seam.
+          </p>
+          <div class="metric-grid" aria-label="Delivery scope">
+            <div class="metric">
+              <strong>4 codebases</strong>
+              <span>Coordinated from the interface through downstream integration</span>
+            </div>
+            <div class="metric">
+              <strong>End to end</strong>
+              <span>One accountable owner for the change and its validation</span>
+            </div>
+            <div class="metric">
+              <strong>UI kept clear</strong>
+              <span>Sensitive values stayed out of the visible interface state</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="section" aria-labelledby="path-heading">
+          <p class="eyebrow">The delivery path</p>
+          <h2 id="path-heading">I mapped every handoff before changing code.</h2>
+          <ol class="chain">
+            <li>
+              <h3>Map the contract</h3>
+              <p>Defined where each identifier began, where it moved, and where it was required.</p>
+            </li>
+            <li>
+              <h3>Keep the interface quiet</h3>
+              <p>Preserved the downstream data path without exposing sensitive values to users.</p>
+            </li>
+            <li>
+              <h3>Carry it through the API</h3>
+              <p>Maintained the contract through the quoting service and policy integration.</p>
+            </li>
+            <li>
+              <h3>Protect shared seams</h3>
+              <p>Coordinated the shared parameter service instead of patching around it.</p>
+            </li>
+            <li>
+              <h3>Test the whole route</h3>
+              <p>Used automated coverage, review, delivery checks, and release readiness work.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="section" aria-labelledby="ownership-heading">
+          <p class="eyebrow">My part</p>
+          <h2 id="ownership-heading">My role went past one repository.</h2>
+          <p>
+            I orchestrated the change and validation from the Angular interface through the Java
+            services and downstream integration. That included coordinating work across teams and
+            making sure the final release behaved as one system.
+          </p>
+          <ul class="stack" aria-label="Technology and practices used">
+            <li>Angular</li>
+            <li>Java and Spring</li>
+            <li>Automated testing</li>
+            <li>CI and CD</li>
+            <li>Secure SDLC</li>
+          </ul>
+        </section>
+
+        <aside class="note" aria-labelledby="privacy-heading">
+          <h2 id="privacy-heading">What stays private</h2>
+          <p>
+            The public version explains the system boundary and my role. It does not publish the
+            identifiers, customer details, internal service names, or proprietary data contracts.
+          </p>
+        </aside>
+
+        <div class="actions">
+          <a class="button" href="../../#/impact">Open this in PatterOS</a>
+          <a class="button button--quiet" href="../../assets/ConnorPattersonResume2026.pdf"
+            >Read the résumé</a
+          >
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <strong>Connor Patterson</strong> · Lead Full Stack Software Engineer ·
+      <a href="mailto:connor.patter@aol.com">connor.patter@aol.com</a>
+    </footer>
+  </body>
+</html>

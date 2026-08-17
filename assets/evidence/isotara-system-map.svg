@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title description">
+  <title id="title">Isotara system map</title>
+  <desc id="description">A portfolio sketch showing card recipes moving through reusable effects, encounters, and run progression.</desc>
+  <defs>
+    <linearGradient id="backdrop" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#071c25"/>
+      <stop offset="1" stop-color="#102f31"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#8ee6c2" stroke-opacity=".08"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="960" height="420" rx="18" fill="url(#backdrop)"/>
+  <rect width="960" height="420" rx="18" fill="url(#grid)"/>
+  <path d="M50 84H910" stroke="#8ee6c2" stroke-opacity=".24"/>
+  <text x="50" y="48" fill="#f4f1df" font-family="Arial, sans-serif" font-size="24" font-weight="700">ISOTARA</text>
+  <text x="50" y="70" fill="#8ee6c2" font-family="monospace" font-size="12" letter-spacing="2">SYSTEM SKETCH • MODULAR RUN LOOP</text>
+  <g fill="none" stroke="#f0b966" stroke-width="3" stroke-linecap="round">
+    <path d="M240 226H296"/>
+    <path d="M472 226H528"/>
+    <path d="M704 226H760"/>
+  </g>
+  <g fill="#f0b966">
+    <path d="m296 226-13-8v16z"/>
+    <path d="m528 226-13-8v16z"/>
+    <path d="m760 226-13-8v16z"/>
+  </g>
+  <g transform="translate(64 134)">
+    <rect width="176" height="184" rx="12" fill="#f7f2df" stroke="#8ee6c2" stroke-width="3"/>
+    <rect x="14" y="14" width="148" height="74" rx="8" fill="#183b3b"/>
+    <circle cx="88" cy="51" r="18" fill="none" stroke="#8ee6c2" stroke-width="3"/>
+    <circle cx="66" cy="51" r="5" fill="#f0b966"/>
+    <circle cx="110" cy="51" r="5" fill="#f0b966"/>
+    <text x="18" y="118" fill="#123037" font-family="Arial, sans-serif" font-size="16" font-weight="700">CARD RECIPE</text>
+    <text x="18" y="142" fill="#456269" font-family="monospace" font-size="12">cost • target • tags</text>
+    <text x="18" y="163" fill="#456269" font-family="monospace" font-size="12">effect references</text>
+  </g>
+  <g transform="translate(296 154)">
+    <rect width="176" height="144" rx="12" fill="#12343a" stroke="#8ee6c2" stroke-width="3"/>
+    <g fill="#8ee6c2">
+      <circle cx="44" cy="48" r="12"/>
+      <circle cx="88" cy="48" r="12"/>
+      <circle cx="132" cy="48" r="12"/>
+    </g>
+    <g stroke="#f0b966" stroke-width="3"><path d="M56 48H76M100 48h20"/></g>
+    <text x="18" y="94" fill="#f4f1df" font-family="Arial, sans-serif" font-size="16" font-weight="700">EFFECT STACK</text>
+    <text x="18" y="118" fill="#a8c9c1" font-family="monospace" font-size="12">reuse • compose • test</text>
+  </g>
+  <g transform="translate(528 134)">
+    <rect width="176" height="184" rx="12" fill="#12343a" stroke="#8ee6c2" stroke-width="3"/>
+    <path d="M28 31h120v62H28z" fill="#0a222b" stroke="#577b76"/>
+    <path d="M46 76 70 52l22 18 30-27 18 17" fill="none" stroke="#f0b966" stroke-width="4"/>
+    <text x="18" y="126" fill="#f4f1df" font-family="Arial, sans-serif" font-size="16" font-weight="700">ENCOUNTER</text>
+    <text x="18" y="150" fill="#a8c9c1" font-family="monospace" font-size="12">resolve state</text>
+    <text x="18" y="171" fill="#a8c9c1" font-family="monospace" font-size="12">emit outcomes</text>
+  </g>
+  <g transform="translate(760 154)">
+    <rect width="136" height="144" rx="68" fill="#12343a" stroke="#8ee6c2" stroke-width="3"/>
+    <circle cx="68" cy="54" r="27" fill="none" stroke="#f0b966" stroke-width="5" stroke-dasharray="30 10" filter="url(#glow)"/>
+    <text x="68" y="104" text-anchor="middle" fill="#f4f1df" font-family="Arial, sans-serif" font-size="15" font-weight="700">NEXT ROOM</text>
+    <text x="68" y="124" text-anchor="middle" fill="#a8c9c1" font-family="monospace" font-size="11">run state</text>
+  </g>
+  <path d="M828 310c0 64-696 64-696 16" fill="none" stroke="#8ee6c2" stroke-width="2" stroke-dasharray="7 8" stroke-opacity=".65"/>
+  <path d="m132 326-8 14h16z" fill="#8ee6c2"/>
+  <text x="480" y="392" text-anchor="middle" fill="#8ee6c2" font-family="monospace" font-size="12" letter-spacing="1">PROGRESSION FEEDS THE NEXT CARD CHOICE</text>
+</svg>
