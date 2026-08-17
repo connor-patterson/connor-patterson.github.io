@@ -1,8 +1,8 @@
 @if (booting()) {
   <section
     class="boot-screen"
-    role="dialog"
-    aria-modal="true"
+    role="status"
+    aria-live="polite"
     aria-labelledby="boot-title"
     aria-describedby="boot-status"
   >
@@ -30,10 +30,6 @@
         <span [class.boot-screen__segment--ready]="bootStep() > index"></span>
       }
     </div>
-
-    <button class="boot-screen__skip" type="button" aria-keyshortcuts="Escape" (click)="skipBoot()">
-      Skip boot <span aria-hidden="true">Esc</span>
-    </button>
   </section>
 }
 
@@ -139,7 +135,7 @@
           >
             @switch (window.definition.id) {
               @case ('start') {
-                <app-start-panel (openApp)="openApp($event)" />
+                <app-start-panel (openApp)="openApp($event)" (startTour)="startTour()" />
               }
               @case ('impact') {
                 @defer (on immediate) {
@@ -218,6 +214,20 @@
 
     <router-outlet />
   </main>
+
+  @if (tourActive()) {
+    @if (tourSteps[tourStepIndex()]; as step) {
+      <app-tour-bar
+        [label]="step.label"
+        [prompt]="step.prompt"
+        [step]="tourStepIndex() + 1"
+        [total]="tourSteps.length"
+        (previousRequested)="moveTour(-1)"
+        (nextRequested)="moveTour(1)"
+        (endRequested)="endTour()"
+      />
+    }
+  }
 
   @if (launcherOpen()) {
     <app-launcher-menu

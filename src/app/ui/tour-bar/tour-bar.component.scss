@@ -1,0 +1,122 @@
+:host {
+  position: fixed;
+  z-index: 1200;
+  right: 1rem;
+  bottom: 4.55rem;
+  display: block;
+  width: min(43rem, calc(100vw - 2rem));
+}
+
+.tour-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  color: var(--ink);
+  background: var(--surface-raised);
+  border: 2px solid var(--signal-strong);
+  box-shadow: 7px 8px 0 rgb(4 15 24 / 32%);
+  animation: tour-arrive var(--motion-medium) var(--ease-spring-3, ease-out) both;
+}
+
+.tour-bar__copy {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 0.12rem;
+}
+
+.tour-bar__copy > span {
+  color: var(--signal-strong);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.tour-bar__copy strong {
+  font-family: var(--font-interface);
+  font-size: 1rem;
+}
+
+.tour-bar__copy p {
+  overflow: hidden;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tour-bar__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.35rem;
+}
+
+.tour-bar__actions button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--border-mid);
+  cursor: pointer;
+  font-family: var(--font-interface);
+  font-weight: 850;
+}
+
+.tour-bar__actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.tour-bar__actions .tour-bar__next {
+  min-width: 5rem;
+  color: #fff;
+  background: var(--action);
+}
+
+@keyframes tour-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  :host {
+    right: 0.5rem;
+    bottom: 4.15rem;
+    width: calc(100vw - 1rem);
+  }
+
+  .tour-bar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.65rem;
+  }
+
+  .tour-bar__copy p {
+    white-space: normal;
+  }
+
+  .tour-bar__actions {
+    width: 100%;
+  }
+
+  .tour-bar__actions .tour-bar__next {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-bar {
+    animation: none;
+  }
+}

@@ -1,0 +1,21 @@
+<aside class="tour-bar" aria-label="Quick portfolio tour">
+  <div class="tour-bar__copy">
+    <span>QUICK TOUR · {{ step() }} / {{ total() }}</span>
+    <strong>{{ label() }}</strong>
+    <p>{{ prompt() }}</p>
+  </div>
+  <div class="tour-bar__actions">
+    <button
+      type="button"
+      [disabled]="step() === 1"
+      aria-label="Previous tour stop"
+      (click)="previousRequested.emit()"
+    >
+      ←
+    </button>
+    <button class="tour-bar__next" type="button" (click)="nextRequested.emit()">
+      {{ step() === total() ? 'Finish' : 'Next' }}
+    </button>
+    <button type="button" aria-label="End quick tour" (click)="endRequested.emit()">×</button>
+  </div>
+</aside>

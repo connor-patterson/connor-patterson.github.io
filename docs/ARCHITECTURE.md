@@ -8,7 +8,7 @@ The product direction takes one lesson from standout personal sites: the medium 
 
 The launch architecture optimizes for five properties:
 
-1. **Clear first view:** name, role, selected impact, résumé, and contact are quickly reachable after a roughly one second boot that can always be skipped.
+1. **Clear first view:** name, role, selected impact, résumé, and contact are quickly reachable after a roughly one second automatic boot.
 2. **Static reliability:** the complete site runs from files on GitHub Pages with no application server.
 3. **Accessible adaptation:** wide screens support movable windows; compact and reading modes preserve normal document flow and focus order.
 4. **Useful customization:** color, motion, texture, reading layout, window size, and window position are local preferences with safe defaults.
@@ -25,7 +25,7 @@ flowchart LR
     Windows --> Shell["Desktop shell and taskbar"]
     Registry --> Shell
     Preferences["PreferencesService"] --> Shell
-    Boot["Short skippable boot"] --> Shell
+    Boot["Short automatic boot"] --> Shell
     Shell --> Start["Eager Start window"]
     Shell --> Apps["Evidence and secondary apps"]
     Shell --> Arcade["Lazy four-game arcade"]
@@ -55,7 +55,7 @@ Do not add a copied `404.html` SPA fallback while hash routing is active.
 
 ### Boot and first paint
 
-The root document contains a small fallback, then Angular shows a short PatterOS boot card while the shell mounts. It lasts about 1.1 seconds with motion enabled and about 80 milliseconds for a reduced motion preference. Escape and the visible Skip button finish it immediately.
+The root document contains a small fallback, then Angular shows a short PatterOS boot card while the shell mounts. It lasts about 1.1 seconds with motion enabled and about 80 milliseconds for a reduced motion preference. The boot is a noninteractive status view and closes automatically.
 
 The boot sequence has no network or data dependency. It stages the desktop icons and Start window rather than hiding a slow application startup. The résumé and contact fallback in `index.html` remain available when JavaScript is disabled.
 
@@ -199,7 +199,7 @@ The authoritative local gate is `npm run check`:
 6. seven viewport app smoke gate plus direct page, print, and axe checks
 7. production dependency audit
 
-Automated checks are necessary but not sufficient for visual acceptance. Before publishing a material UI change, inspect wide desktop, compact and mobile layouts, keyboard use, every color mode, Comfortable Reading, and reduced motion. Confirm the boot can be skipped, focus never becomes trapped, resizing stays bounded, shared routes survive reload, the background never blocks controls, and both games can restart cleanly.
+Automated checks are necessary but not sufficient for visual acceptance. Before publishing a material UI change, inspect wide desktop, compact and mobile layouts, keyboard use, every color mode, Comfortable Reading, and reduced motion. Confirm the automatic boot completes quickly, focus never becomes trapped, resizing stays bounded, shared routes survive reload, the background never blocks controls, and every game can restart cleanly.
 
 ## Extension rules
 

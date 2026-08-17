@@ -8,7 +8,7 @@ The first view stays concise. A visitor can open deeper evidence, case studies, 
 
 The following contracts remain fixed unless a future architecture decision explicitly replaces them:
 
-- Professional evidence follows a roughly one second boot that is always skippable and nearly instant with reduced motion.
+- Professional evidence follows a roughly one second automatic boot that becomes nearly instant with reduced motion.
 - The project remains functional as a static GitHub Pages site.
 - `main` is source and `gh-pages` is generated output.
 - The repository owns no custom GitHub Actions workflow.
@@ -178,7 +178,7 @@ No network service is planned for this release.
 
 - A pixel for pixel Windows 95 or 98 clone
 - A fake terminal that makes visitors guess commands
-- A long unskippable startup animation
+- A long startup animation
 - A public score leaderboard requiring accounts or moderation
 - A CMS, database, or server solely to edit portfolio copy
 - Auto playing audio or motion heavy ambient effects

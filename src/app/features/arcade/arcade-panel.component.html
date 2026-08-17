@@ -24,18 +24,18 @@
         >
           <span class="game-card__picture" [attr.data-game]="game.id" aria-hidden="true">
             @if (game.id === 'snake') {
-              <span class="preview-snake"><i></i><i></i><i></i><i></i><b></b></span>
+              <span class="preview-snake"> <i></i><i></i><i></i><i></i><i></i><i></i><b></b> </span>
             } @else if (game.id === 'memory-match') {
-              <i>★</i><i>◆</i><i>★</i><i>◆</i>
+              <span class="preview-memory"> <i>★</i><i>◆</i><i>?</i><i>★</i><i>◆</i><i>?</i> </span>
             } @else if (game.id === 'tic-tac-toe') {
-              <span class="preview-ttt"
-                ><i>X</i><i>O</i><i>X</i><i></i><i>X</i><i>O</i><i>O</i><i></i><i>X</i></span
-              >
+              <span class="preview-ttt">
+                <i>X</i><i>O</i><i>X</i><i></i><i>X</i><i>O</i><i>O</i><i></i><i>X</i>
+              </span>
             } @else {
-              <span class="preview-mines"
-                ><i>1</i><i></i><i>2</i><i>⚑</i><i>1</i><i></i><i></i><i>1</i><i></i><i>1</i><i>1</i
-                ><i></i
-              ></span>
+              <span class="preview-mines">
+                <i>1</i><i></i><i>1</i><i>⚑</i><i>1</i><i>2</i><i>2</i><i>1</i><i></i><i>1</i
+                ><i>✹</i><i>1</i>
+              </span>
             }
           </span>
           <span class="game-card__copy">

@@ -12,6 +12,7 @@ import { PORTFOLIO_ASSETS, START_COPY, START_METRICS } from '../../../data/portf
 })
 export class StartPanelComponent {
   readonly openApp = output<AppId>();
+  readonly startTour = output<void>();
 
   readonly copy = START_COPY;
   readonly metrics = START_METRICS;
@@ -19,5 +20,9 @@ export class StartPanelComponent {
 
   open(id: AppId): void {
     this.openApp.emit(id);
+  }
+
+  beginTour(): void {
+    this.startTour.emit();
   }
 }

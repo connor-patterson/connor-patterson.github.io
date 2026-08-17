@@ -6,8 +6,8 @@ Live site: [connor-patterson.github.io](https://connor-patterson.github.io/)
 
 ## What is inside
 
-- Eight useful desktop shortcuts in a compact three column cluster.
-- A quieter first view with production results and project evidence available when a visitor wants the detail.
+- Ten useful desktop shortcuts in a compact three column cluster.
+- A concise first view with an optional five-stop recruiter tour through work, architecture, projects, résumé, and contact.
 - Conventional minimize, maximize, and close controls, with sharing, size presets, and repositioning tucked into a window options menu.
 - Snake, Memory Match, Tic Tac Toe, and Minesweeper.
 - An interactive full stack system explorer and a live, read-only GitHub view.

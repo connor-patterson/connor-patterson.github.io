@@ -25,6 +25,7 @@ import { AppIconComponent } from './ui/app-icon/app-icon.component';
 import { DesktopShortcutComponent } from './ui/desktop-shortcut/desktop-shortcut.component';
 import { LauncherMenuComponent } from './ui/launcher-menu/launcher-menu.component';
 import { TaskbarComponent } from './ui/taskbar/taskbar.component';
+import { TourBarComponent } from './ui/tour-bar/tour-bar.component';
 import { WindowFrameComponent } from './ui/window-frame/window-frame.component';
 
 type LazyAppId = 'arcade' | 'github' | 'settings' | 'systems';
@@ -35,6 +36,32 @@ interface DesktopRipple {
   y: number;
 }
 
+interface TourStep {
+  readonly id: AppId;
+  readonly label: string;
+  readonly prompt: string;
+}
+
+const TOUR_STEPS: readonly TourStep[] = [
+  {
+    id: 'impact',
+    label: 'Work Log',
+    prompt: 'Start with the production work and measured results.',
+  },
+  {
+    id: 'systems',
+    label: 'System Explorer',
+    prompt: 'See how I connect client, service, and delivery decisions.',
+  },
+  {
+    id: 'builds',
+    label: 'Builds',
+    prompt: 'Move from enterprise work to the projects I own end to end.',
+  },
+  { id: 'resume', label: 'Résumé', prompt: 'Scan the one-page version or download a copy.' },
+  { id: 'contact', label: 'Contact', prompt: 'Finish with the simplest ways to reach me.' },
+];
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -43,6 +70,7 @@ interface DesktopRipple {
     DesktopShortcutComponent,
     LauncherMenuComponent,
     TaskbarComponent,
+    TourBarComponent,
     WindowFrameComponent,
     AppIconComponent,
     StartPanelComponent,
@@ -72,6 +100,9 @@ export class AppComponent {
   readonly booting = signal(true);
   readonly bootStep = signal(0);
   readonly toast = signal<string | null>(null);
+  readonly tourActive = signal(false);
+  readonly tourStepIndex = signal(0);
+  readonly tourSteps = TOUR_STEPS;
   readonly desktopRipples = signal<readonly DesktopRipple[]>([]);
   readonly bootLabels = ['DISPLAY', 'SHORTCUTS', 'WORKSPACE'] as const;
   readonly announcement = signal(
@@ -134,10 +165,6 @@ export class AppComponent {
   @HostListener('document:keydown', ['$event'])
   handleGlobalKeydown(event: KeyboardEvent): void {
     if (this.booting()) {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        this.skipBoot();
-      }
       return;
     }
 
@@ -305,8 +332,26 @@ export class AppComponent {
     }
   }
 
-  skipBoot(): void {
-    this.finishBoot();
+  startTour(): void {
+    this.tourActive.set(true);
+    this.tourStepIndex.set(0);
+    this.openTourStep();
+  }
+
+  moveTour(direction: -1 | 1): void {
+    const nextIndex = this.tourStepIndex() + direction;
+    if (nextIndex < 0) return;
+    if (nextIndex >= this.tourSteps.length) {
+      this.endTour();
+      return;
+    }
+    this.tourStepIndex.set(nextIndex);
+    this.openTourStep();
+  }
+
+  endTour(): void {
+    this.tourActive.set(false);
+    this.announcement.set('Quick tour ended. The desktop remains open for exploring.');
   }
 
   toggleLauncher(): void {
@@ -396,6 +441,13 @@ export class AppComponent {
       this.toast.set(null);
       this.toastTimer = 0;
     }, 2_400);
+  }
+
+  private openTourStep(): void {
+    const step = this.tourSteps[this.tourStepIndex()];
+    if (!step) return;
+    this.openApp(step.id);
+    this.announcement.set(`Tour step ${this.tourStepIndex() + 1}: ${step.label}. ${step.prompt}`);
   }
 
   private focusWindow(id: AppId, preventScroll = false): void {

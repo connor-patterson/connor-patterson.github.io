@@ -131,11 +131,11 @@ try {
     (await page.locator('.boot-screen .patteros-wordmark').innerText()) === 'PatterOS',
     'The boot screen did not preserve the mixed case PatterOS wordmark.',
   );
-  await page.getByRole('button', { name: /Skip boot/ }).click();
+  await page.locator('.boot-screen').waitFor({ state: 'detached', timeout: 3_000 });
   await page.locator('#window-start').waitFor({ state: 'visible' });
   assert(
     (await page.locator('.boot-screen').count()) === 0,
-    'Skip boot did not reveal the desktop.',
+    'The automatic boot did not reveal the desktop.',
   );
   assert(
     (await page.locator('app-desktop-shortcut').count()) === 10,
@@ -185,6 +185,17 @@ try {
     'A window control incorrectly created a desktop signal ripple.',
   );
 
+  await page.getByRole('button', { name: 'Take the quick tour' }).click();
+  await page.locator('#window-impact').waitFor({ state: 'visible' });
+  const tourBar = page.getByRole('complementary', { name: 'Quick portfolio tour' });
+  await tourBar.getByText('Work Log', { exact: true }).waitFor();
+  await tourBar.getByRole('button', { name: 'Next' }).click();
+  await page.locator('#window-systems').waitFor({ state: 'visible' });
+  await tourBar.getByText('System Explorer', { exact: true }).waitFor();
+  await tourBar.getByRole('button', { name: 'End quick tour' }).click();
+  await tourBar.waitFor({ state: 'detached' });
+  await page.getByRole('button', { name: 'Open Start Here', exact: true }).click();
+
   await page.keyboard.press('Control+K');
   const launcherClose = page.getByRole('button', { name: 'Close application launcher' });
   await launcherClose.waitFor({ state: 'visible' });
@@ -224,11 +235,7 @@ try {
     await page.setViewportSize(viewport);
     await page.reload({ waitUntil: 'domcontentloaded' });
     await page.locator('.boot-screen').waitFor({ state: 'visible' });
-    if (viewport.width === 320) {
-      await page.locator('.boot-screen').waitFor({ state: 'detached', timeout: 3_000 });
-    } else {
-      await page.getByRole('button', { name: /Skip boot/ }).click();
-    }
+    await page.locator('.boot-screen').waitFor({ state: 'detached', timeout: 3_000 });
     await page.locator('#window-start').waitFor({ state: 'visible' });
     await page.waitForTimeout(350);
     await page.waitForFunction(
@@ -369,7 +376,7 @@ try {
   await page.evaluate(() => localStorage.removeItem('patteros.window-layout.v3'));
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.locator('.boot-screen').waitFor({ state: 'visible' });
-  await page.getByRole('button', { name: /Skip boot/ }).click();
+  await page.locator('.boot-screen').waitFor({ state: 'detached', timeout: 3_000 });
   await page.locator('#window-start .window-frame__control--tools').click();
   await page.locator('#window-start .window-frame__preset').selectOption('wide');
   await page.getByRole('button', { name: /Open Builds/ }).click();

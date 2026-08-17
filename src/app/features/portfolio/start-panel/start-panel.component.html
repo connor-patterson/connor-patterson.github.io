@@ -8,11 +8,15 @@
         <p class="start-panel__intro">{{ paragraph }}</p>
       }
 
+      <p class="start-panel__guide">
+        New here? The quick tour opens the useful windows in order. It takes about three minutes.
+      </p>
+
       <div class="start-panel__actions" aria-label="Portfolio shortcuts">
-        <button class="retro-button retro-button--primary" type="button" (click)="open('impact')">
-          View my work
+        <button class="retro-button retro-button--primary" type="button" (click)="beginTour()">
+          Take the quick tour
         </button>
-        <button class="retro-button" type="button" (click)="open('builds')">Side projects</button>
+        <button class="retro-button" type="button" (click)="open('impact')">Open Work Log</button>
         <button class="retro-button" type="button" (click)="open('resume')">Open résumé</button>
       </div>
     </div>
@@ -33,6 +37,17 @@
       <span>FULL STACK SOFTWARE ENGINEER</span>
     </aside>
   </div>
+
+  <section class="start-panel__route" aria-labelledby="recommended-route">
+    <strong id="recommended-route">A useful route through the desktop</strong>
+    <ol>
+      <li>Work Log</li>
+      <li>System Explorer</li>
+      <li>Builds</li>
+      <li>Résumé</li>
+      <li>Contact</li>
+    </ol>
+  </section>
 
   <div class="start-panel__metrics" aria-label="Career highlights">
     @for (metric of metrics; track metric.label) {
