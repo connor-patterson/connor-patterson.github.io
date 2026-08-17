@@ -694,6 +694,9 @@ try {
   await page.keyboard.press('Enter');
   await snake.locator('.snake-board[data-status="running"]').waitFor();
   await snake.locator('.snake-board[data-direction="down"]').waitFor({ timeout: 1_500 });
+  const snakeHeadBeforeMinimize = await snake
+    .locator('.snake-cell[data-kind="head"]')
+    .evaluate((element) => [...(element.parentElement?.children ?? [])].indexOf(element));
   await page
     .getByRole('contentinfo', { name: 'PatterOS taskbar' })
     .getByRole('button', { name: 'Minimize PatterOS Arcade' })
@@ -701,16 +704,13 @@ try {
   await page.waitForFunction(
     () => document.querySelector('.snake-board')?.getAttribute('data-status') === 'paused',
   );
-  const snakeHeadWhilePaused = await snake
-    .locator('.snake-cell[data-kind="head"]')
-    .evaluate((element) => [...(element.parentElement?.children ?? [])].indexOf(element));
   await page.keyboard.press('ArrowLeft');
   await page.waitForTimeout(300);
   assert(
     (await snake
       .locator('.snake-cell[data-kind="head"]')
       .evaluate((element) => [...(element.parentElement?.children ?? [])].indexOf(element))) ===
-      snakeHeadWhilePaused,
+      snakeHeadBeforeMinimize,
     'Snake kept moving after its window was minimized.',
   );
   await page
@@ -770,12 +770,6 @@ try {
   await page.getByRole('button', { name: /^Play Tic Tac Toe\./ }).click();
   const ticTacToe = page.locator('.ttt');
   await ticTacToe.getByRole('button', { name: 'Choose square 1' }).click();
-  await page.waitForFunction(
-    () =>
-      [...document.querySelectorAll('.ttt__board button')].filter((button) =>
-        button.textContent?.trim(),
-      ).length >= 2,
-  );
   assert(
     (
       await ticTacToe

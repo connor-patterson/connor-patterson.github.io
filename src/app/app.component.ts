@@ -2,7 +2,6 @@ import { DOCUMENT, NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   effect,
   HostListener,
@@ -93,7 +92,6 @@ export class AppComponent {
 
   readonly windows = inject(WindowManagerService);
   readonly preferences = inject(PreferencesService);
-  readonly crtWarp = computed(() => this.preferences.crtIntensity() * 0.32);
   readonly apps = DESKTOP_APPS;
   readonly desktopApps = DESKTOP_APPS.filter((app) => app.desktopShortcut);
   readonly launcherOpen = signal(false);
