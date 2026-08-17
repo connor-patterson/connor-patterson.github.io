@@ -39,9 +39,7 @@ export class PreferencesService {
       const crtStrength = preferences.crtIntensity / 100;
       this.document.body.classList.toggle('crt-screen', preferences.crtIntensity > 0);
       this.document.documentElement.style.setProperty('--crt-strength', `${crtStrength}`);
-      this.document.documentElement.style.setProperty('--crt-radius', `${crtStrength * 4}rem`);
-      this.document.documentElement.style.setProperty('--crt-vignette', `${crtStrength * 7}rem`);
-      this.document.documentElement.style.setProperty('--crt-bezel', `${crtStrength * 0.42}rem`);
+      this.document.documentElement.style.setProperty('--crt-vignette', `${crtStrength * 4}rem`);
       this.document.body.classList.toggle('motion-disabled', !preferences.motion);
       this.document.body.classList.toggle('reading-mode', preferences.readingMode);
 

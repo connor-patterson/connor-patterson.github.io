@@ -85,7 +85,7 @@ Constraints:
 
 ### Preferences
 
-`PreferencesService` owns Day Shift, Night Shift, High Contrast, CRT intensity, motion, and Comfortable Reading. CRT intensity defaults to 100 and drives presentation-only overlay variables, so it does not distort pointer geometry or window calculations. Values are stored under a versioned local storage key. Storage failures are nonfatal.
+`PreferencesService` owns Day Shift, Night Shift, High Contrast, CRT texture intensity, motion, and Comfortable Reading. CRT texture intensity defaults to 100 and drives compositor-friendly scanline, fringe, highlight, and vignette overlays. It never filters or rerasterizes the interactive desktop. Values are stored under a versioned local storage key. Storage failures are nonfatal.
 
 The operating system reduced motion preference wins on initial load. The UI does not reenable animation against that preference without an explicit user action. Comfortable Reading stacks open windows, disables drag-only controls, and increases text spacing without introducing a second content model.
 
