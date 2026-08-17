@@ -48,11 +48,27 @@
     </div>
   </fieldset>
 
-  <label class="settings-panel__toggle">
-    <input type="checkbox" [checked]="preferences.scanlines()" (change)="setScanlines($event)" />
-    <span>
-      <strong>CRT scanlines</strong>
-      <small>Add visible monitor lines and a soft edge vignette.</small>
+  <label class="settings-panel__crt">
+    <span class="settings-panel__crt-heading">
+      <span>
+        <strong>CRT screen</strong>
+        <small>Dial in the curved glass, scanlines, color fringe, and edge shadow.</small>
+      </span>
+      <output for="crt-intensity">{{ preferences.crtIntensity() }}%</output>
+    </span>
+    <input
+      id="crt-intensity"
+      type="range"
+      min="0"
+      max="100"
+      step="5"
+      [value]="preferences.crtIntensity()"
+      [attr.aria-valuetext]="preferences.crtIntensity() + ' percent CRT intensity'"
+      (input)="setCrtIntensity($event)"
+    />
+    <span class="settings-panel__crt-scale" aria-hidden="true">
+      <small>FLAT</small>
+      <small>FULL CRT</small>
     </span>
   </label>
 

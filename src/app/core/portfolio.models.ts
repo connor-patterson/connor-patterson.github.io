@@ -53,7 +53,7 @@ export type ThemeMode = 'day' | 'night' | 'contrast';
 
 export interface ThemePreferences {
   readonly theme: ThemeMode;
-  readonly scanlines: boolean;
+  readonly crtIntensity: number;
   readonly motion: boolean;
   readonly readingMode: boolean;
 }

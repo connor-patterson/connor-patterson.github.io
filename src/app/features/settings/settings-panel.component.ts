@@ -17,8 +17,8 @@ export class SettingsPanelComponent {
   private readonly document = inject(DOCUMENT);
   private readonly windows = inject(WindowManagerService);
 
-  setScanlines(event: Event): void {
-    this.preferences.setScanlines((event.target as HTMLInputElement).checked);
+  setCrtIntensity(event: Event): void {
+    this.preferences.setCrtIntensity((event.target as HTMLInputElement).valueAsNumber);
   }
 
   setMotion(event: Event): void {

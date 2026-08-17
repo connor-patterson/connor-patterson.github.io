@@ -3,12 +3,12 @@ import { effect, inject, Injectable, signal } from '@angular/core';
 
 import type { ThemeMode, ThemePreferences } from './portfolio.models';
 
-const STORAGE_KEY = 'patteros.preferences.v2';
-const SCANLINE_DEFAULT_KEY = 'patteros.scanlines-visible.v1';
+const STORAGE_KEY = 'patteros.preferences.v3';
+const LEGACY_STORAGE_KEY = 'patteros.preferences.v2';
 
 const DEFAULT_PREFERENCES: ThemePreferences = {
   theme: 'day',
-  scanlines: true,
+  crtIntensity: 100,
   motion: true,
   readingMode: false,
 };
@@ -20,7 +20,7 @@ export class PreferencesService {
     typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   readonly theme = signal<ThemeMode>(DEFAULT_PREFERENCES.theme);
-  readonly scanlines = signal(DEFAULT_PREFERENCES.scanlines);
+  readonly crtIntensity = signal(DEFAULT_PREFERENCES.crtIntensity);
   readonly motion = signal(!this.prefersReducedMotion);
   readonly readingMode = signal(DEFAULT_PREFERENCES.readingMode);
 
@@ -30,13 +30,18 @@ export class PreferencesService {
     effect(() => {
       const preferences: ThemePreferences = {
         theme: this.theme(),
-        scanlines: this.scanlines(),
+        crtIntensity: this.crtIntensity(),
         motion: this.motion(),
         readingMode: this.readingMode(),
       };
 
       this.document.documentElement.dataset['theme'] = preferences.theme;
-      this.document.body.classList.toggle('scanlines', preferences.scanlines);
+      const crtStrength = preferences.crtIntensity / 100;
+      this.document.body.classList.toggle('crt-screen', preferences.crtIntensity > 0);
+      this.document.documentElement.style.setProperty('--crt-strength', `${crtStrength}`);
+      this.document.documentElement.style.setProperty('--crt-radius', `${crtStrength * 4}rem`);
+      this.document.documentElement.style.setProperty('--crt-vignette', `${crtStrength * 7}rem`);
+      this.document.documentElement.style.setProperty('--crt-bezel', `${crtStrength * 0.42}rem`);
       this.document.body.classList.toggle('motion-disabled', !preferences.motion);
       this.document.body.classList.toggle('reading-mode', preferences.readingMode);
 
@@ -56,8 +61,8 @@ export class PreferencesService {
     this.theme.update((theme) => (theme === 'day' ? 'night' : 'day'));
   }
 
-  setScanlines(enabled: boolean): void {
-    this.scanlines.set(enabled);
+  setCrtIntensity(intensity: number): void {
+    this.crtIntensity.set(Math.min(100, Math.max(0, Math.round(intensity))));
   }
 
   setMotion(enabled: boolean): void {
@@ -70,7 +75,7 @@ export class PreferencesService {
 
   reset(): void {
     this.theme.set(DEFAULT_PREFERENCES.theme);
-    this.scanlines.set(DEFAULT_PREFERENCES.scanlines);
+    this.crtIntensity.set(DEFAULT_PREFERENCES.crtIntensity);
     this.motion.set(!this.prefersReducedMotion);
     this.readingMode.set(DEFAULT_PREFERENCES.readingMode);
     try {
@@ -82,10 +87,9 @@ export class PreferencesService {
 
   private readStoredPreferences(): void {
     try {
-      const hasVisibleScanlineDefault = localStorage.getItem(SCANLINE_DEFAULT_KEY) === 'true';
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const currentStored = localStorage.getItem(STORAGE_KEY);
+      const stored = currentStored ?? localStorage.getItem(LEGACY_STORAGE_KEY);
       if (!stored) {
-        localStorage.setItem(SCANLINE_DEFAULT_KEY, 'true');
         return;
       }
 
@@ -93,8 +97,8 @@ export class PreferencesService {
       if (parsed.theme === 'day' || parsed.theme === 'night' || parsed.theme === 'contrast') {
         this.theme.set(parsed.theme);
       }
-      if (hasVisibleScanlineDefault && typeof parsed.scanlines === 'boolean') {
-        this.scanlines.set(parsed.scanlines);
+      if (currentStored && typeof parsed.crtIntensity === 'number') {
+        this.setCrtIntensity(parsed.crtIntensity);
       }
       if (typeof parsed.motion === 'boolean' && !this.prefersReducedMotion) {
         this.motion.set(parsed.motion);
@@ -102,7 +106,6 @@ export class PreferencesService {
       if (typeof parsed.readingMode === 'boolean') {
         this.readingMode.set(parsed.readingMode);
       }
-      localStorage.setItem(SCANLINE_DEFAULT_KEY, 'true');
     } catch {
       // Invalid or unavailable local preferences should never block the portfolio.
     }

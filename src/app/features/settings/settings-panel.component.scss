@@ -41,6 +41,7 @@
 }
 
 .settings-panel fieldset,
+.settings-panel__crt,
 .settings-panel__toggle,
 .settings-panel__actions {
   grid-column: 1 / -1;
@@ -72,6 +73,58 @@
   padding: 0.75rem;
   background: color-mix(in srgb, var(--surface-raised), transparent 15%);
   border: 1px solid var(--border-mid);
+}
+
+.settings-panel__crt {
+  display: grid;
+  gap: 0.65rem;
+  min-height: 6.3rem;
+  padding: 0.8rem;
+  background: color-mix(in srgb, var(--surface-raised), transparent 15%);
+  border: 1px solid var(--border-mid);
+}
+
+.settings-panel__crt-heading,
+.settings-panel__crt-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.settings-panel__crt strong,
+.settings-panel__crt small {
+  display: block;
+}
+
+.settings-panel__crt small {
+  margin-top: 0.2rem;
+  color: var(--ink-muted);
+}
+
+.settings-panel__crt output {
+  align-self: start;
+  min-width: 3.5rem;
+  padding: 0.25rem 0.4rem;
+  color: var(--titlebar-text);
+  background: var(--titlebar);
+  border: 1px solid var(--border-dark);
+  font-family: var(--font-interface);
+  font-weight: 700;
+  text-align: center;
+}
+
+.settings-panel__crt input[type='range'] {
+  width: 100%;
+  height: 2rem;
+  margin: 0;
+  accent-color: var(--signal-strong);
+  cursor: ew-resize;
+}
+
+.settings-panel__crt-scale small {
+  margin: 0;
+  font-family: var(--font-interface);
+  font-size: 0.68rem;
 }
 
 .settings-panel__toggle input {
