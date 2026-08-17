@@ -555,6 +555,11 @@ try {
     .evaluate((element) => element.style.getPropertyValue('--window-x'));
   await startWindow.locator('.window-frame__control--tools').click();
   await startWindow.getByRole('button', { name: 'Reposition Start Here without dragging' }).click();
+  await page.waitForFunction(
+    (previousX) =>
+      document.querySelector('#window-start')?.style.getPropertyValue('--window-x') !== previousX,
+    initialWindowX,
+  );
   assert(
     (await page
       .locator('#window-start')
